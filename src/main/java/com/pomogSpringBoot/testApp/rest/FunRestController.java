@@ -8,7 +8,12 @@ public class FunRestController {
     
     @GetMapping("/")
     public String sayHello(){
-        return "Hello!";
+        return "Hello! spring-boot-devtools";
+    }
+    
+    @GetMapping("/devtools")
+    public String devtools(){
+        return "spring-boot-devtools is OK!";
     }
     
 }
