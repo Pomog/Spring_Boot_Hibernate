@@ -1,6 +1,6 @@
-package com.pomogSpringBoot.testApp.coach;
+package com.pomogSpringBoot.testApp.common.coach;
 
-import com.pomogSpringBoot.testApp.inrerface.Coach;
+import com.pomogSpringBoot.testApp.common.inrerface.Coach;
 import org.springframework.stereotype.Component;
 
 @Component
