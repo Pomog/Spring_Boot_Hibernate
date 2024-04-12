@@ -11,6 +11,10 @@ public class DemoController {
     private Coach myCoach;
     private Coach myNextCoach;
     
+    @Qualifier("thirdCoach")
+    @Autowired
+    private Coach myCoachFieldInj;
+    
     @Autowired
     public DemoController (@Qualifier("cricketCoach") Coach theCoach){
         myCoach = theCoach;
@@ -29,5 +33,10 @@ public class DemoController {
     @GetMapping("/workout2")
     public String getWorkoutSetterAutowired(){
         return myNextCoach.workout();
+    }
+    
+    @GetMapping("/workout3")
+    public String getWorkoutFieldAutowired(){
+        return myCoachFieldInj.workout();
     }
 }
