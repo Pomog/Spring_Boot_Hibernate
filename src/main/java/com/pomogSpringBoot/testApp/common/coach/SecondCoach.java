@@ -13,4 +13,9 @@ public class SecondCoach implements Coach {
     public String workout() {
         return "Practice for 25 min. SecondCoach";
     }
+    
+    @Override
+    public String getCoachName() {
+        return null;
+    }
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DemoController {
     private final Coach myCoach;
+    private final Coach myCoach2;
     
     @Qualifier("secondCoach")
     @Autowired
@@ -19,9 +20,10 @@ public class DemoController {
     private Coach myCoachFieldInj;
     
     @Autowired
-    public DemoController (Coach theCoach){
+    public DemoController (Coach theCoach, @Qualifier("aqua") Coach myCoach2){
+        this.myCoach = theCoach;
+        this.myCoach2 = myCoach2;
         System.out.printf("inside constructor: %s\n",  getClass().getSimpleName());
-        myCoach = theCoach;
     }
     
     @Autowired
@@ -31,16 +33,20 @@ public class DemoController {
     
     @GetMapping("/workout")
     public String getWorkout(){
-        return myCoach.workout();
+        return myCoach.workout() + " " + myCoach.getCoachName();
     }
     
     @GetMapping("/workout2")
     public String getWorkoutSetterAutowired(){
-        return myNextCoach.workout();
+        return myNextCoach.workout() + "  " + myNextCoach.getCoachName();
     }
     
     @GetMapping("/workout3")
     public String getWorkoutFieldAutowired(){
         return myCoachFieldInj.workout();
+    }
+    @GetMapping("/workout4")
+    public String getWorkoutBeanAnnotation(){
+        return myCoach2.workout() + " " + myCoach2.getCoachName();
     }
 }
