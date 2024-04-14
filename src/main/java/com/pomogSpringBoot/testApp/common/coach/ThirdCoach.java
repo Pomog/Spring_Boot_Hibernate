@@ -1,4 +1,4 @@
-⁶package com.pomogSpringBoot.testApp.common.coach;
+package com.pomogSpringBoot.testApp.common.coach;
 
 import com.pomogSpringBoot.testApp.common.inrerface.Coach;
 import org.springframework.stereotype.Component;
