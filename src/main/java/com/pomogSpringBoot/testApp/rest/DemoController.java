@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class DemoController {
-    private Coach myCoach;
+    private final Coach myCoach;
+    
+    @Qualifier("secondCoach")
+    @Autowired
     private Coach myNextCoach;
     
     @Qualifier("thirdCoach")
@@ -16,7 +19,8 @@ public class DemoController {
     private Coach myCoachFieldInj;
     
     @Autowired
-    public DemoController (@Qualifier("cricketCoach") Coach theCoach){
+    public DemoController (Coach theCoach){
+        System.out.printf("inside constructor: %s\n",  getClass().getSimpleName());
         myCoach = theCoach;
     }
     

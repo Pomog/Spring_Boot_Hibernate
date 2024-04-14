@@ -5,6 +5,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SecondCoach implements Coach {
+    public SecondCoach() {
+        System.out.printf("inside constructor: %s\n",  getClass().getSimpleName());
+    }
+    
     @Override
     public String workout() {
         return "Practice for 25 min. SecondCoach";
