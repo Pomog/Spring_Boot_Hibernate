@@ -26,6 +26,12 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	compileOnly('org.springframework.boot:spring-boot-devtools:3.2.2')
+
+	// Spring Boot Starter Data JPA
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// MySQL Connector/J
+	implementation 'mysql:mysql-connector-java'
 }
 
 tasks.named('test') {
