@@ -60,7 +60,7 @@ public class LabGlassware {
     
     // List of glass joints associated with the lab glassware.
     @OneToMany(mappedBy = "labGlassware", cascade = CascadeType.ALL)
-    private List<GlassJoint> glassJoints = new ArrayList<>();;
+    private List<GlassJoint> glassJoints = new ArrayList<>();
     
     public void addGlassJoint(GlassJoint glassJoint) {
         this.glassJoints.add(glassJoint);

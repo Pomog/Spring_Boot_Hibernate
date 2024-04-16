@@ -23,7 +23,8 @@ public class GlassJoint {
         @NonNull
         private String sizeDesignation;
         
+        // Define the relationship to LabGlassware
         @ManyToOne
-        @JoinColumn(name = "lab_glassware_id")
+        @JoinColumn(name = "lab_glassware_id", referencedColumnName = "id")
         private LabGlassware labGlassware;
 }
