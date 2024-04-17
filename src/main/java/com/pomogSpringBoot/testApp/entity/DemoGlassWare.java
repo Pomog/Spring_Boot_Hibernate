@@ -11,7 +11,7 @@ public class DemoGlassWare {
         
         var glassJoint = new GlassJoint(JointType.SPHERICAL_BALL, "S35");
         var labGlassware = new LabGlassware();
-        labGlassware.addGlassJoint(glassJoint);
+//        labGlassware.addGlassJoint(glassJoint);
         
         System.out.println(labGlassware.toString());
     }

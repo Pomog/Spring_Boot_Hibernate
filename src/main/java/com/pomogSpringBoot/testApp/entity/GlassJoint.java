@@ -3,7 +3,7 @@ package com.pomogSpringBoot.testApp.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
+//@Entity
 @Table(name = "glass_joint")
 @Data
 @NoArgsConstructor

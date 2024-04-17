@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="lab-glassware")
+@Table(name = "lab_glassware")
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
@@ -33,7 +33,6 @@ public class LabGlassware {
     private String manufacturer;
     
     @Column(name = "location")
-    @NonNull
     private String location;
     
     @Column(name = "status")
@@ -55,13 +54,12 @@ public class LabGlassware {
     private String provider;
     
     @Column(name = "capacity_ml")
-    @NonNull
     private Integer capacityML;
     
     // List of glass joints associated with the lab glassware.
     @OneToMany(mappedBy = "labGlassware", cascade = CascadeType.ALL)
     private List<GlassJoint> glassJoints = new ArrayList<>();
-    
+
     public void addGlassJoint(GlassJoint glassJoint) {
         this.glassJoints.add(glassJoint);
     }
