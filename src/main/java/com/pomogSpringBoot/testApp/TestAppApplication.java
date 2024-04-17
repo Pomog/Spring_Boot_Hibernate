@@ -36,12 +36,16 @@ public class TestAppApplication {
 		var glassJoint = new GlassJoint(JointType.SPHERICAL_BALL, "S35");
 		var labGlassware = new LabGlassware("Flask");
 		labGlassware.setLastMaintenanceDate(Date.valueOf(LocalDate.now()));
-//		labGlassware.addGlassJoint(glassJoint);
+		labGlassware.addGlassJoint(glassJoint);
 		
 		System.out.println("Saving test LabGlassware");
 		labGlasswareDAO.save(labGlassware);
 		
 		System.out.println("Display ID of the saved labGlassware");
 		System.out.println(labGlassware.getId());
+		
+		System.out.println("Display ID of the saved glassJoint and corresponds labGlassware ID");
+		System.out.println(glassJoint.getId());
+		System.out.println(glassJoint.getLabGlassware().getId());
 	}
 }

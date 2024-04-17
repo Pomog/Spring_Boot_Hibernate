@@ -3,7 +3,7 @@ package com.pomogSpringBoot.testApp.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-//@Entity
+@Entity
 @Table(name = "glass_joint")
 @Data
 @NoArgsConstructor
@@ -25,6 +25,6 @@ public class GlassJoint {
         
         // Define the relationship to LabGlassware
         @ManyToOne
-        @JoinColumn(name = "lab_glassware_id", referencedColumnName = "id")
+        @JoinColumn(name = "lab_glassware_id")
         private LabGlassware labGlassware;
 }
