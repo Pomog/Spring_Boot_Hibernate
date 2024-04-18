@@ -26,14 +26,7 @@ public class GlassJoint {
         // Define the relationship to LabGlassware
         @ManyToOne
         @JoinColumn(name = "lab_glassware_id")
+        @ToString.Exclude
+        @EqualsAndHashCode.Exclude
         private LabGlassware labGlassware;
-        
-        @Override
-        public String toString() {
-                return "GlassJoint{" +
-                        "id=" + id +
-                        ", type=" + type +
-                        ", sizeDesignation='" + sizeDesignation + '\'' +
-                        '}';
-        }
 }

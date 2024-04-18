@@ -2,13 +2,16 @@ package com.pomogSpringBoot.testApp.dao;
 
 import com.pomogSpringBoot.testApp.entity.LabGlassware;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public class LabGlasswareDAOImpl implements LabGlasswareDAO{
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
     
     @Autowired
     public LabGlasswareDAOImpl(EntityManager entityManager) {
@@ -22,8 +25,14 @@ public class LabGlasswareDAOImpl implements LabGlasswareDAO{
     }
     
     @Override
-    @Transactional
     public LabGlassware findLabGlasswareByID(Integer id) {
         return entityManager.find(LabGlassware.class, id);
+    }
+    
+    @Override
+    public List<LabGlassware> findAllLabGlassware() {
+        TypedQuery<LabGlassware> findAllQuery = entityManager.createQuery("FROM LabGlassware", LabGlassware.class);
+        
+        return findAllQuery.getResultList();
     }
 }

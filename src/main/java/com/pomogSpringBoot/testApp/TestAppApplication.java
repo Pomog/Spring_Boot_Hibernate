@@ -27,8 +27,14 @@ public class TestAppApplication {
 //			createLabGlassware(labGlasswareDAO);
 //			createMultipleLabGlassware(labGlasswareDAO);
 			findLabGlasswareByID(labGlasswareDAO, 5);
+			findAllLabGlasswareFromDB(labGlasswareDAO);
 		};
 	
+	}
+	
+	private void findAllLabGlasswareFromDB(LabGlasswareDAO labGlasswareDAO) {
+		var list = labGlasswareDAO.findAllLabGlassware();
+		list.forEach(System.out::println);
 	}
 	
 	private void findLabGlasswareByID(LabGlasswareDAO labGlasswareDAO, Integer id) {
