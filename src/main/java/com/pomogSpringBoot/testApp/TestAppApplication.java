@@ -26,10 +26,16 @@ public class TestAppApplication {
 
 //			createLabGlassware(labGlasswareDAO);
 //			createMultipleLabGlassware(labGlasswareDAO);
-			findLabGlasswareByID(labGlasswareDAO, 5);
-			findAllLabGlasswareFromDB(labGlasswareDAO);
+//			findLabGlasswareByID(labGlasswareDAO, 5);
+//			findAllLabGlasswareFromDB(labGlasswareDAO);
+			findLabGlasswareByNameFromDB(labGlasswareDAO, "Flask");
 		};
 	
+	}
+	
+	private void findLabGlasswareByNameFromDB(LabGlasswareDAO labGlasswareDAO, String name) {
+		var list = labGlasswareDAO.findLabGlasswareByName(name);
+		list.forEach(System.out::println);
 	}
 	
 	private void findAllLabGlasswareFromDB(LabGlasswareDAO labGlasswareDAO) {

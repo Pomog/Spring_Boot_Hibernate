@@ -8,4 +8,6 @@ public interface LabGlasswareDAO {
     void save (LabGlassware labGlassware);
     LabGlassware findLabGlasswareByID (Integer id);
     List<LabGlassware> findAllLabGlassware();
+    
+    List<LabGlassware> findLabGlasswareByName(String name);
 }

@@ -35,4 +35,13 @@ public class LabGlasswareDAOImpl implements LabGlasswareDAO{
         
         return findAllQuery.getResultList();
     }
+    
+    @Override
+    public List<LabGlassware> findLabGlasswareByName(String name) {
+        TypedQuery<LabGlassware> findByNameQuery = entityManager.createQuery(
+                "FROM LabGlassware WHERE name LIKE :name", LabGlassware.class);
+        findByNameQuery.setParameter("name", name);
+        
+        return findByNameQuery.getResultList();
+    }
 }
