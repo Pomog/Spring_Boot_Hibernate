@@ -27,4 +27,13 @@ public class GlassJoint {
         @ManyToOne
         @JoinColumn(name = "lab_glassware_id")
         private LabGlassware labGlassware;
+        
+        @Override
+        public String toString() {
+                return "GlassJoint{" +
+                        "id=" + id +
+                        ", type=" + type +
+                        ", sizeDesignation='" + sizeDesignation + '\'' +
+                        '}';
+        }
 }

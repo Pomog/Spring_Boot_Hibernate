@@ -20,4 +20,10 @@ public class LabGlasswareDAOImpl implements LabGlasswareDAO{
     public void save(LabGlassware labGlassware) {
         entityManager.persist(labGlassware);
     }
+    
+    @Override
+    @Transactional
+    public LabGlassware findLabGlasswareByID(Integer id) {
+        return entityManager.find(LabGlassware.class, id);
+    }
 }

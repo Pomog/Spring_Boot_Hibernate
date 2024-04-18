@@ -25,9 +25,17 @@ public class TestAppApplication {
 			System.out.println("CommandLineRunner");
 
 //			createLabGlassware(labGlasswareDAO);
-			createMultipleLabGlassware(labGlasswareDAO);
+//			createMultipleLabGlassware(labGlasswareDAO);
+			findLabGlasswareByID(labGlasswareDAO, 5);
 		};
 	
+	}
+	
+	private void findLabGlasswareByID(LabGlasswareDAO labGlasswareDAO, Integer id) {
+		var fondLabGlassware = labGlasswareDAO.findLabGlasswareByID(id);
+		System.out.println(fondLabGlassware);
+		System.out.println("Display amount of the glass joints");
+		System.out.println(labGlasswareDAO.findLabGlasswareByID((int) fondLabGlassware.getId()).getGlassJoints().size());
 	}
 	
 	private void createMultipleLabGlassware(LabGlasswareDAO labGlasswareDAO) {
@@ -66,5 +74,9 @@ public class TestAppApplication {
 		System.out.println("Display ID of the saved glassJoint and corresponds labGlassware ID");
 		System.out.println(glassJoint.getId());
 		System.out.println(glassJoint.getLabGlassware().getId());
+		System.out.println("Display amount of the glass joints");
+		System.out.println(labGlasswareDAO.findLabGlasswareByID((int) labGlassware.getId()).getGlassJoints().size());
+		
+		System.out.println(labGlasswareDAO.findLabGlasswareByID((int) labGlassware.getId()));
 	}
 }
