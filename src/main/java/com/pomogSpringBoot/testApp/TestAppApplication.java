@@ -22,15 +22,34 @@ public class TestAppApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(LabGlasswareDAO labGlasswareDAO){
 		return  args -> {
-			System.out.println("CommandLineRunner");
-
 //			createLabGlassware(labGlasswareDAO);
 //			createMultipleLabGlassware(labGlasswareDAO);
 //			findLabGlasswareByID(labGlasswareDAO, 5);
 //			findAllLabGlasswareFromDB(labGlasswareDAO);
-			findLabGlasswareByNameFromDB(labGlasswareDAO, "Flask");
+//			findLabGlasswareByNameFromDB(labGlasswareDAO, "Dropping funnel");
+//			updateLabGlassware(labGlasswareDAO);
+//			deleteLabGlasswareByID(labGlasswareDAO, 17);
+			deleteAllLabGlassware(labGlasswareDAO);
 		};
+	}
 	
+	private void deleteAllLabGlassware(LabGlasswareDAO labGlasswareDAO) {
+		int deletedRows = labGlasswareDAO.deleteAll();
+		System.out.printf("\n%d rows were deleted form labGlasswareDAO\n", deletedRows);
+	}
+	
+	private void deleteLabGlasswareByID(LabGlasswareDAO labGlasswareDAO, int id) {
+		labGlasswareDAO.deleteByID(id);
+	}
+	
+	private void updateLabGlassware(LabGlasswareDAO labGlasswareDAO) {
+		int id = 1;
+		var fondLabGlassware = labGlasswareDAO.findLabGlasswareByID(id);
+		
+		fondLabGlassware.setName("Updated Flask");
+		fondLabGlassware.setStatus("broken");
+		
+		labGlasswareDAO.update(fondLabGlassware);
 	}
 	
 	private void findLabGlasswareByNameFromDB(LabGlasswareDAO labGlasswareDAO, String name) {
@@ -46,12 +65,9 @@ public class TestAppApplication {
 	private void findLabGlasswareByID(LabGlasswareDAO labGlasswareDAO, Integer id) {
 		var fondLabGlassware = labGlasswareDAO.findLabGlasswareByID(id);
 		System.out.println(fondLabGlassware);
-		System.out.println("Display amount of the glass joints");
-		System.out.println(labGlasswareDAO.findLabGlasswareByID((int) fondLabGlassware.getId()).getGlassJoints().size());
 	}
 	
 	private void createMultipleLabGlassware(LabGlasswareDAO labGlasswareDAO) {
-		System.out.println("Creating 3 LabGlasswares");
 		var glassJoint1 = new GlassJoint(JointType.SPHERICAL_BALL, "S35");
 		var glassJoint2 = new GlassJoint(JointType.SPHERICAL_CUP, "S41");
 		var glassJoint3 = new GlassJoint(JointType.CONE_SOCKET, "29/32");
@@ -73,22 +89,10 @@ public class TestAppApplication {
 	private void createLabGlassware(LabGlasswareDAO labGlasswareDAO) {
 		System.out.println("Creating test LabGlassware");
 		var glassJoint = new GlassJoint(JointType.SPHERICAL_BALL, "S35");
-		var labGlassware = new LabGlassware("Flask");
+		var labGlassware = new LabGlassware("Dropping funnel");
 		labGlassware.setLastMaintenanceDate(Date.valueOf(LocalDate.now()));
 		labGlassware.addGlassJoint(glassJoint);
 		
-		System.out.println("Saving test LabGlassware");
 		labGlasswareDAO.save(labGlassware);
-		
-		System.out.println("Display ID of the saved labGlassware");
-		System.out.println(labGlassware.getId());
-		
-		System.out.println("Display ID of the saved glassJoint and corresponds labGlassware ID");
-		System.out.println(glassJoint.getId());
-		System.out.println(glassJoint.getLabGlassware().getId());
-		System.out.println("Display amount of the glass joints");
-		System.out.println(labGlasswareDAO.findLabGlasswareByID((int) labGlassware.getId()).getGlassJoints().size());
-		
-		System.out.println(labGlasswareDAO.findLabGlasswareByID((int) labGlassware.getId()));
 	}
 }

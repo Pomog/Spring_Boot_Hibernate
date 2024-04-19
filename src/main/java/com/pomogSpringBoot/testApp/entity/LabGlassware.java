@@ -57,7 +57,10 @@ public class LabGlassware {
     private Integer capacityML;
     
     // List of glass joints associated with the lab glassware.
-    @OneToMany(mappedBy = "labGlassware", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(
+            mappedBy = "labGlassware",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
     private List<GlassJoint> glassJoints;
 
     public void addGlassJoint(GlassJoint glassJoint) {
