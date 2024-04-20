@@ -28,5 +28,6 @@ public class GlassJoint {
         @JoinColumn(name = "lab_glassware_id")
         @ToString.Exclude
         @EqualsAndHashCode.Exclude
+        @Getter(AccessLevel.NONE)
         private LabGlassware labGlassware;
 }

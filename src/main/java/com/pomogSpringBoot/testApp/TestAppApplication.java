@@ -23,7 +23,7 @@ public class TestAppApplication {
 	public CommandLineRunner commandLineRunner(LabGlasswareDAO labGlasswareDAO){
 		return  args -> {
 //			createLabGlassware(labGlasswareDAO);
-			createMultipleLabGlassware(labGlasswareDAO);
+//			createMultipleLabGlassware(labGlasswareDAO);
 //			findLabGlasswareByID(labGlasswareDAO, 5);
 //			findAllLabGlasswareFromDB(labGlasswareDAO);
 //			findLabGlasswareByNameFromDB(labGlasswareDAO, "Dropping funnel");
