@@ -24,7 +24,7 @@ public class TestAppApplication {
 		return  args -> {
 //			createLabGlassware(labGlasswareDAO);
 //			createMultipleLabGlassware(labGlasswareDAO);
-//			findLabGlasswareByID(labGlasswareDAO, 5);
+//			findLabGlasswareByID(labGlasswareDAO, 4);
 //			findAllLabGlasswareFromDB(labGlasswareDAO);
 //			findLabGlasswareByNameFromDB(labGlasswareDAO, "Dropping funnel");
 //			updateLabGlassware(labGlasswareDAO);
@@ -89,7 +89,7 @@ public class TestAppApplication {
 	private void createLabGlassware(LabGlasswareDAO labGlasswareDAO) {
 		System.out.println("Creating test LabGlassware");
 		var glassJoint = new GlassJoint(JointType.SPHERICAL_BALL, "S35");
-		var labGlassware = new LabGlassware("Dropping funnel");
+		var labGlassware = new LabGlassware("Dropping funnel test");
 		labGlassware.setLastMaintenanceDate(Date.valueOf(LocalDate.now()));
 		labGlassware.addGlassJoint(glassJoint);
 		

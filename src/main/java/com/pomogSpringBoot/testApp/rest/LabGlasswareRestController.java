@@ -3,11 +3,12 @@ package com.pomogSpringBoot.testApp.rest;
 import com.pomogSpringBoot.testApp.entity.GlassJoint;
 import com.pomogSpringBoot.testApp.entity.JointType;
 import com.pomogSpringBoot.testApp.entity.LabGlassware;
+import com.pomogSpringBoot.testApp.rest.errorRespose.LabGlasswareErrorResponse;
+import com.pomogSpringBoot.testApp.rest.errorRespose.LabGlasswareNotFoundExeption;
 import jakarta.annotation.PostConstruct;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -50,7 +51,20 @@ public class LabGlasswareRestController {
     
     @GetMapping("/labglassware/{id}")
     public LabGlassware getLabglasswareByID(@PathVariable int id){
+        if (id >= theLabGlassware.size() || id < 0){
+            throw new LabGlasswareNotFoundExeption("LabGlassware ID not found - " + id);
+        }
         return theLabGlassware.get(id);
+    }
+    
+    @ExceptionHandler
+    public ResponseEntity<LabGlasswareErrorResponse> notFoundHandler (LabGlasswareNotFoundExeption exc){
+        var error = new LabGlasswareErrorResponse();
+        error.setStatus(HttpStatus.NOT_FOUND.value());
+        error.setMessage(exc.getMessage());
+        error.setTimeStamp(new java.util.Date());
+        
+        return new ResponseEntity<>(error,HttpStatus.NOT_FOUND);
     }
     
 }
