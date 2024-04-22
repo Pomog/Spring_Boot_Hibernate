@@ -1,6 +1,6 @@
-package com.pomogSpringBoot.testApp.rest;
+package legacy;
 
-import com.pomogSpringBoot.testApp.common.inrerface.Coach;
+import legacy.common.inrerface.Coach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;

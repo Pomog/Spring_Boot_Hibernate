@@ -11,5 +11,5 @@ public interface LabGlasswareDAO {
     List<LabGlassware> findLabGlasswareByName(String name);
     void update (LabGlassware labGlassware);
     void deleteByID (Integer id);
-    int deleteAll();
+    int deleteAllGlassJoint();
 }

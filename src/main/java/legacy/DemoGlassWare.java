@@ -1,4 +1,8 @@
-package com.pomogSpringBoot.testApp.entity;
+package legacy;
+
+import com.pomogSpringBoot.testApp.entity.GlassJoint;
+import com.pomogSpringBoot.testApp.entity.JointType;
+import com.pomogSpringBoot.testApp.entity.LabGlassware;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Parameter;

@@ -61,7 +61,7 @@ public class LabGlasswareDAOImpl implements LabGlasswareDAO{
     
     @Override
     @Transactional
-    public int deleteAll() {
+    public int deleteAllGlassJoint() {
         
         entityManager.createQuery("DELETE FROM GlassJoint").executeUpdate();
         

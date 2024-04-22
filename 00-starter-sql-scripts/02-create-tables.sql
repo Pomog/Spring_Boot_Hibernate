@@ -1,5 +1,5 @@
 CREATE
-DATABASE  IF NOT EXISTS `student_tracker`;
+DATABASE  IF NOT EXISTS `labGlassware`;
 USE `student_tracker`;
 
 --

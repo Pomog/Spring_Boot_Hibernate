@@ -1,6 +1,6 @@
-package com.pomogSpringBoot.testApp.common.coach;
+package legacy.common.coach;
 
-import com.pomogSpringBoot.testApp.common.inrerface.Coach;
+import legacy.common.inrerface.Coach;
 import org.springframework.stereotype.Component;
 /*
     for field injection

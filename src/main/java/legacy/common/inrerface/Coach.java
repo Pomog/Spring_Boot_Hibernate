@@ -1,4 +1,4 @@
-package com.pomogSpringBoot.testApp.common.inrerface;
+package legacy.common.inrerface;
 
 public interface Coach {
     String workout();

@@ -1,11 +1,9 @@
-package com.pomogSpringBoot.testApp.common.coach;
+package legacy.common.coach;
 
-import com.pomogSpringBoot.testApp.common.inrerface.Coach;
+import legacy.common.inrerface.Coach;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
