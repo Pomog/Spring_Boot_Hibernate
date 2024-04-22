@@ -2,6 +2,8 @@ package com.pomogSpringBoot.testApp.rest;
 
 import com.pomogSpringBoot.testApp.dao.LabGlasswareDAO;
 import com.pomogSpringBoot.testApp.entity.LabGlassware;
+import com.pomogSpringBoot.testApp.service.LabGlasswareService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,15 +14,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class LabGlasswareRestController {
-    private final LabGlasswareDAO labGlasswareDAO;
+    private LabGlasswareService labGlasswareService;
     
-    public LabGlasswareRestController(LabGlasswareDAO labGlasswareDAO) {
-        this.labGlasswareDAO = labGlasswareDAO;
+    @Autowired
+    public LabGlasswareRestController(LabGlasswareService labGlasswareService) {
+        this.labGlasswareService = labGlasswareService;
     }
     
     @GetMapping("/labglassware")
     public List<LabGlassware> getLabGlassware (){
-        return labGlasswareDAO.findAllLabGlassware();
+        return labGlasswareService.findAll();
     }
     
     @GetMapping("/labglassware/{id}")
