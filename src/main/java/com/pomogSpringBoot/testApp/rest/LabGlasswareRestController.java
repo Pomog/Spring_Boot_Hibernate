@@ -57,25 +57,7 @@ public class LabGlasswareRestController {
         return theLabGlassware.get(id);
     }
     
-    @ExceptionHandler
-    public ResponseEntity<LabGlasswareErrorResponse> notFoundHandler (LabGlasswareNotFoundExeption exc){
-        var error = new LabGlasswareErrorResponse();
-        error.setStatus(HttpStatus.NOT_FOUND.value());
-        error.setMessage(exc.getMessage());
-        error.setTimeStamp(new java.util.Date());
-        
-        return new ResponseEntity<>(error,HttpStatus.NOT_FOUND);
-    }
-    
-    @ExceptionHandler
-    public ResponseEntity<LabGlasswareErrorResponse> handleException(Exception exc) {
-        var error = new LabGlasswareErrorResponse();
-        error.setStatus(HttpStatus.BAD_REQUEST.value());
-        error.setMessage(exc.getMessage());
-        error.setTimeStamp(new java.util.Date());
-        
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
-    }
+
     
     
 }
