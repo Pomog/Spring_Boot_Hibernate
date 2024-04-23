@@ -19,6 +19,7 @@ public class LabGlasswareDAOImpl implements LabGlasswareDAO{
     }
     
     @Override
+    @Transactional
     public LabGlassware save (LabGlassware labGlassware) {
         return entityManager.merge(labGlassware);
     }

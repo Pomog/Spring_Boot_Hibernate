@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LabGlasswareServiceImpl implements LabGlasswareService{
@@ -19,8 +20,18 @@ public class LabGlasswareServiceImpl implements LabGlasswareService{
     
     @Override
     @Transactional
-    public LabGlassware save(LabGlassware labGlassware) {
+    public LabGlassware save(LabGlassware labGlasswareReq) {
+       var labGlassware = createLabGlasswareFormReq(labGlasswareReq);
        return this.labGlasswareDAO.save(labGlassware);
+    }
+    
+    private LabGlassware createLabGlasswareFormReq(LabGlassware labGlasswareReq) {
+        labGlasswareReq.setGlassJoints(
+                labGlasswareReq.getGlassJoints().stream()
+                        .peek(glassJoint -> glassJoint.setLabGlassware(labGlasswareReq))
+                        .collect(Collectors.toList())
+        );
+        return labGlasswareReq;
     }
     
     @Override

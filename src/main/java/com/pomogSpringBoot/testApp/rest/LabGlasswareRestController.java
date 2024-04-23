@@ -1,13 +1,10 @@
 package com.pomogSpringBoot.testApp.rest;
 
-import com.pomogSpringBoot.testApp.dao.LabGlasswareDAO;
 import com.pomogSpringBoot.testApp.entity.LabGlassware;
+import com.pomogSpringBoot.testApp.rest.errorRespose.LabGlasswareNotFoundException;
 import com.pomogSpringBoot.testApp.service.LabGlasswareService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,7 +25,16 @@ public class LabGlasswareRestController {
     
     @GetMapping("/labglassware/{id}")
     public LabGlassware getLabglasswareByID(@PathVariable int id){
-        return null;
+        var labGlassware = labGlasswareService.findLabGlasswareByID(id);
+        if (labGlassware == null){
+            throw new LabGlasswareNotFoundException("Not found item with id: " + id);
+        }
+        return labGlassware;
+    }
+    
+    @PostMapping("/labglassware")
+    public LabGlassware addLabGlassware(@RequestBody LabGlassware labGlassware){
+        return labGlasswareService.save(labGlassware);
     }
     
 }

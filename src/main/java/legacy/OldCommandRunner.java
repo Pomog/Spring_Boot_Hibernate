@@ -28,15 +28,15 @@ public class OldCommandRunner {
         labGlasswareDAO.deleteByID(id);
     }
     
-    private void updateLabGlassware(LabGlasswareDAO labGlasswareDAO) {
-        int id = 1;
-        var fondLabGlassware = labGlasswareDAO.findLabGlasswareByID(id);
-        
-        fondLabGlassware.setName("Updated Flask");
-        fondLabGlassware.setStatus("broken");
-        
-        labGlasswareDAO.update(fondLabGlassware);
-    }
+//    private void updateLabGlassware(LabGlasswareDAO labGlasswareDAO) {
+//        int id = 1;
+//        var fondLabGlassware = labGlasswareDAO.findLabGlasswareByID(id);
+//
+//        fondLabGlassware.setName("Updated Flask");
+//        fondLabGlassware.setStatus("broken");
+//
+//        labGlasswareDAO.update(fondLabGlassware);
+//    }
     
     private void findLabGlasswareByNameFromDB(LabGlasswareDAO labGlasswareDAO, String name) {
         var list = labGlasswareDAO.findLabGlasswareByName(name);
