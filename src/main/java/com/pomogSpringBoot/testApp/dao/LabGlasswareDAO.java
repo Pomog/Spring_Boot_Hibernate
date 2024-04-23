@@ -5,11 +5,10 @@ import com.pomogSpringBoot.testApp.entity.LabGlassware;
 import java.util.List;
 
 public interface LabGlasswareDAO {
-    void save (LabGlassware labGlassware);
+    LabGlassware save (LabGlassware labGlassware);
     LabGlassware findLabGlasswareByID (Integer id);
     List<LabGlassware> findAllLabGlassware();
     List<LabGlassware> findLabGlasswareByName(String name);
-    void update (LabGlassware labGlassware);
     void deleteByID (Integer id);
     int deleteAllGlassJoint();
 }

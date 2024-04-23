@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class LabGlasswareRestController {
-    private LabGlasswareService labGlasswareService;
+    private final LabGlasswareService labGlasswareService;
     
     @Autowired
     public LabGlasswareRestController(LabGlasswareService labGlasswareService) {
@@ -23,7 +23,7 @@ public class LabGlasswareRestController {
     
     @GetMapping("/labglassware")
     public List<LabGlassware> getLabGlassware (){
-        return labGlasswareService.findAll();
+        return labGlasswareService.findAllLabGlassware();
     }
     
     @GetMapping("/labglassware/{id}")
