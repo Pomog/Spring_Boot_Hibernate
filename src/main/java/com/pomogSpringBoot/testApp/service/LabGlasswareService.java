@@ -6,9 +6,10 @@ import java.util.List;
 
 public interface LabGlasswareService {
     LabGlassware save (LabGlassware labGlassware);
-    LabGlassware findLabGlasswareByID (Integer id);
+    LabGlassware update (LabGlassware labGlassware);
+    LabGlassware findLabGlasswareByID (Long id);
     List<LabGlassware> findAllLabGlassware();
     List<LabGlassware> findLabGlasswareByName(String name);
-    void deleteByID (Integer id);
+    void deleteByID (Long id);
     int deleteAllGlassJoint();;
 }

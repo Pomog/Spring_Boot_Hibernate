@@ -25,7 +25,7 @@ public class LabGlasswareDAOImpl implements LabGlasswareDAO{
     }
     
     @Override
-    public LabGlassware findLabGlasswareByID(Integer id) {
+    public LabGlassware findLabGlasswareByID(Long id) {
         return entityManager.find(LabGlassware.class, id);
     }
     
@@ -46,14 +46,12 @@ public class LabGlasswareDAOImpl implements LabGlasswareDAO{
     }
     
     @Override
-    public void deleteByID(Integer id) {
+    public void deleteByID(Long id) {
         entityManager.remove(entityManager.find(LabGlassware.class, id));
     }
     
     @Override
     public int deleteAllGlassJoint() {
-        entityManager.createQuery("DELETE FROM GlassJoint").executeUpdate();
-        
         return entityManager.createQuery(
                 "DELETE FROM LabGlassware ").executeUpdate();
     }

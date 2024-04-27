@@ -2,6 +2,7 @@ package com.pomogSpringBoot.testApp.service;
 
 import com.pomogSpringBoot.testApp.dao.LabGlasswareDAO;
 import com.pomogSpringBoot.testApp.entity.LabGlassware;
+import com.pomogSpringBoot.testApp.rest.errorRespose.LabGlasswareNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,11 @@ public class LabGlasswareServiceImpl implements LabGlasswareService{
        return this.labGlasswareDAO.save(labGlassware);
     }
     
+    @Override
+    public LabGlassware update(LabGlassware labGlassware) {
+        return null;
+    }
+    
     private LabGlassware createLabGlasswareFormReq(LabGlassware labGlasswareReq) {
         labGlasswareReq.setGlassJoints(
                 labGlasswareReq.getGlassJoints().stream()
@@ -35,7 +41,7 @@ public class LabGlasswareServiceImpl implements LabGlasswareService{
     }
     
     @Override
-    public LabGlassware findLabGlasswareByID(Integer id) {
+    public LabGlassware findLabGlasswareByID(Long id) {
         return this.labGlasswareDAO.findLabGlasswareByID(id);
     }
     
@@ -51,7 +57,7 @@ public class LabGlasswareServiceImpl implements LabGlasswareService{
     
     @Override
     @Transactional
-    public void deleteByID(Integer id) {
+    public void deleteByID(Long id) {
         this.labGlasswareDAO.deleteByID(id);
     }
     

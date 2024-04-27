@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface LabGlasswareDAO {
     LabGlassware save (LabGlassware labGlassware);
-    LabGlassware findLabGlasswareByID (Integer id);
+    LabGlassware findLabGlasswareByID (Long id);
     List<LabGlassware> findAllLabGlassware();
     List<LabGlassware> findLabGlasswareByName(String name);
-    void deleteByID (Integer id);
+    void deleteByID (Long id);
     int deleteAllGlassJoint();
 }

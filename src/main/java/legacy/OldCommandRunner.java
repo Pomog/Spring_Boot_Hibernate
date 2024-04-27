@@ -24,7 +24,7 @@ public class OldCommandRunner {
         System.out.printf("\n%d rows were deleted form labGlasswareDAO\n", deletedRows);
     }
     
-    private void deleteLabGlasswareByID(LabGlasswareDAO labGlasswareDAO, int id) {
+    private void deleteLabGlasswareByID(LabGlasswareDAO labGlasswareDAO, Long id) {
         labGlasswareDAO.deleteByID(id);
     }
     
@@ -48,7 +48,7 @@ public class OldCommandRunner {
         list.forEach(System.out::println);
     }
     
-    private void findLabGlasswareByID(LabGlasswareDAO labGlasswareDAO, Integer id) {
+    private void findLabGlasswareByID(LabGlasswareDAO labGlasswareDAO, Long id) {
         var fondLabGlassware = labGlasswareDAO.findLabGlasswareByID(id);
         System.out.println(fondLabGlassware);
     }
