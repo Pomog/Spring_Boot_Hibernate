@@ -1,8 +1,9 @@
 package com.pomogSpringBoot.testApp.service;
 
 import com.pomogSpringBoot.testApp.dao.LabGlasswareDAO;
+import com.pomogSpringBoot.testApp.dao.LabGlasswareRepository;
+import com.pomogSpringBoot.testApp.dto.LabGlasswareDTO;
 import com.pomogSpringBoot.testApp.entity.LabGlassware;
-import com.pomogSpringBoot.testApp.rest.errorRespose.LabGlasswareNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,17 +14,28 @@ import java.util.stream.Collectors;
 @Service
 public class LabGlasswareServiceImpl implements LabGlasswareService{
     private final LabGlasswareDAO labGlasswareDAO;
+    private final LabGlasswareRepository labGlasswareRepository;
     
     @Autowired
-    public LabGlasswareServiceImpl(LabGlasswareDAO labGlasswareDAO) {
+    public LabGlasswareServiceImpl(LabGlasswareDAO labGlasswareDAO, LabGlasswareRepository labGlasswareRepository) {
         this.labGlasswareDAO = labGlasswareDAO;
+        this.labGlasswareRepository = labGlasswareRepository;
     }
     
     @Override
     @Transactional
-    public LabGlassware save(LabGlassware labGlasswareReq) {
+    public LabGlasswareDTO save(LabGlassware labGlasswareReq){
+        var labGlassware = createLabGlasswareFormReq(labGlasswareReq);
+        LabGlassware savedLabGlassware = labGlasswareRepository.save(labGlassware);
+
+        return new LabGlasswareDTO(savedLabGlassware);
+    }
+    
+    @Override
+    @Transactional
+    public LabGlasswareDTO saveUsingDAO(LabGlassware labGlasswareReq) {
        var labGlassware = createLabGlasswareFormReq(labGlasswareReq);
-       return this.labGlasswareDAO.save(labGlassware);
+       return new LabGlasswareDTO(labGlasswareDAO.save(labGlassware));
     }
     
     @Override

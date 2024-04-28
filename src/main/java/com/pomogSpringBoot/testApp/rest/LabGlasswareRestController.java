@@ -1,7 +1,8 @@
 package com.pomogSpringBoot.testApp.rest;
 
+import com.pomogSpringBoot.testApp.dto.LabGlasswareDTO;
 import com.pomogSpringBoot.testApp.entity.LabGlassware;
-import com.pomogSpringBoot.testApp.rest.errorRespose.LabGlasswareNotFoundException;
+import com.pomogSpringBoot.testApp.rest.errorRespose.LabGlasswareException;
 import com.pomogSpringBoot.testApp.service.LabGlasswareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,24 +28,28 @@ public class LabGlasswareRestController {
     public LabGlassware getLabglasswareByID(@PathVariable Long id) {
         var labGlassware = labGlasswareService.findLabGlasswareByID(id);
         if (labGlassware == null) {
-            throw new LabGlasswareNotFoundException("Not found item with id: " + id);
+            throw new LabGlasswareException("Not found item with id: " + id);
         }
         return labGlassware;
     }
     
     @PostMapping("/labglassware")
-    public LabGlassware addLabGlassware(@RequestBody LabGlassware labGlassware) {
-        return labGlasswareService.save(labGlassware);
+    public LabGlasswareDTO addLabGlassware(@RequestBody LabGlassware labGlassware) {
+        if (labGlassware.getId() != null) {
+            throw new LabGlasswareException("The Request Body can not contain ID");
+        } else {
+            return labGlasswareService.saveUsingDAO(labGlassware);
+        }
     }
     
     @PutMapping("/labglassware")
-    public LabGlassware updateLabGlassware(@RequestBody LabGlassware labGlassware) {
+    public LabGlasswareDTO updateLabGlassware(@RequestBody LabGlassware labGlassware) {
         if (labGlassware.getId() == null) {
-            throw new LabGlasswareNotFoundException("ID cannot be empty");
+            throw new LabGlasswareException("ID cannot be empty");
         } else {
             LabGlassware existingLabGlassware = labGlasswareService.findLabGlasswareByID(labGlassware.getId());
             if (existingLabGlassware == null) {
-                throw new LabGlasswareNotFoundException("LabGlassware not found");
+                throw new LabGlasswareException("LabGlassware not found");
             }
         }
         return labGlasswareService.save(labGlassware);
@@ -54,7 +59,7 @@ public class LabGlasswareRestController {
     public String deleteLabGlasswareByID(@PathVariable long id) {
         var foundLabGlassware = labGlasswareService.findLabGlasswareByID(id);
         if (foundLabGlassware == null) {
-            throw new LabGlasswareNotFoundException("LabGlassware not found");
+            throw new LabGlasswareException("LabGlassware not found");
         }
         labGlasswareService.deleteByID(id);
         return "LabGlassware with id: " + id + " was deleted.";

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class LabGlasswareExceptionHandler {
     @ExceptionHandler
-    public ResponseEntity<LabGlasswareErrorResponse> notFoundHandler (LabGlasswareNotFoundException exc){
+    public ResponseEntity<LabGlasswareErrorResponse> notFoundHandler (LabGlasswareException exc){
         var error = new LabGlasswareErrorResponse();
         error.setStatus(HttpStatus.NOT_FOUND.value());
         error.setMessage(exc.getMessage());
