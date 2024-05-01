@@ -2,7 +2,7 @@ package com.pomogSpringBoot.testApp.rest;
 
 import com.pomogSpringBoot.testApp.dto.LabGlasswareDTO;
 import com.pomogSpringBoot.testApp.entity.LabGlassware;
-import com.pomogSpringBoot.testApp.rest.errorRespose.LabGlasswareException;
+import com.pomogSpringBoot.testApp.errorRespose.LabGlasswareException;
 import com.pomogSpringBoot.testApp.service.LabGlasswareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

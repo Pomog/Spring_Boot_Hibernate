@@ -1,4 +1,4 @@
-package com.pomogSpringBoot.testApp.rest.errorRespose;
+package com.pomogSpringBoot.testApp.errorRespose;
 
 public class LabGlasswareException extends RuntimeException {
     public LabGlasswareException(String message) {

@@ -1,4 +1,4 @@
-package com.pomogSpringBoot.testApp.rest.errorRespose;
+package com.pomogSpringBoot.testApp.errorRespose;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
