@@ -4,6 +4,7 @@ import com.pomogSpringBoot.testApp.dto.LabGlasswareDTO;
 import com.pomogSpringBoot.testApp.entity.LabGlassware;
 import com.pomogSpringBoot.testApp.errorRespose.LabGlasswareException;
 import com.pomogSpringBoot.testApp.service.LabGlasswareService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,23 +35,15 @@ public class LabGlasswareRestController {
     }
     
     @PostMapping("/labglassware")
-    public LabGlasswareDTO addLabGlassware(@RequestBody LabGlassware labGlassware) {
-        if (labGlassware.getId() != null) {
-            throw new LabGlasswareException("The Request Body can not contain ID");
-        } else {
-            return labGlasswareService.saveUsingDAO(labGlassware);
-        }
+    public LabGlasswareDTO addLabGlassware(@RequestBody @NonNull LabGlassware labGlassware) {
+        return labGlasswareService.saveUsingDAO(labGlassware);
     }
     
     @PutMapping("/labglassware")
-    public LabGlasswareDTO updateLabGlassware(@RequestBody LabGlassware labGlassware) {
-        if (labGlassware.getId() == null) {
-            throw new LabGlasswareException("ID cannot be empty");
-        } else {
-            LabGlassware existingLabGlassware = labGlasswareService.findLabGlasswareByID(labGlassware.getId());
-            if (existingLabGlassware == null) {
-                throw new LabGlasswareException("LabGlassware not found");
-            }
+    public LabGlasswareDTO updateLabGlassware(@RequestBody @NonNull LabGlassware labGlassware) {
+        LabGlassware existingLabGlassware = labGlasswareService.findLabGlasswareByID(labGlassware.getId());
+        if (existingLabGlassware == null) {
+            throw new LabGlasswareException("LabGlassware not found");
         }
         return labGlasswareService.save(labGlassware);
     }
