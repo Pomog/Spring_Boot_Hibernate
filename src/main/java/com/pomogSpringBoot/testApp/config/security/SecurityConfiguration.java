@@ -17,7 +17,7 @@ public class SecurityConfiguration {
     @Bean
     public InMemoryUserDetailsManager userDetailsManager() {
         UserDetails testUser = User.builder()
-                .username("Yurii")
+                .username("User")
                 .password("{noop}123")
                 .roles(UserRole.USER.name())
                 .build();
@@ -45,6 +45,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.POST, "/api/**").hasAnyRole(UserRole.MANAGER.name(), UserRole.ADMIN.name())
                         .requestMatchers(HttpMethod.PUT, "/api/**").hasAnyRole(UserRole.MANAGER.name(), UserRole.ADMIN.name())
                         .requestMatchers(HttpMethod.DELETE, "/api/**").hasRole(UserRole.ADMIN.name())
+                        .requestMatchers(HttpMethod.GET, "/**").hasRole(UserRole.ADMIN.name())
         );
         http.httpBasic(Customizer.withDefaults());
         http.csrf(AbstractHttpConfigurer::disable);

@@ -21,8 +21,12 @@ public class LabGlasswareRestController {
     }
     
     @GetMapping("/labglassware")
-    public List<LabGlassware> getLabGlassware() {
-        return labGlasswareService.findAllLabGlassware();
+    public List<LabGlasswareDTO> getLabGlassware() {
+        var labGlassware = labGlasswareService.findAllLabGlassware();
+        if (labGlassware.isEmpty()) {
+            throw new LabGlasswareException("Not found items");
+        }
+        return labGlassware;
     }
     
     @GetMapping("/labglassware/{id}")
@@ -30,6 +34,15 @@ public class LabGlasswareRestController {
         var labGlassware = labGlasswareService.findLabGlasswareByID(id);
         if (labGlassware == null) {
             throw new LabGlasswareException("Not found item with id: " + id);
+        }
+        return labGlassware;
+    }
+    
+    @GetMapping("/labglasswareName/{name}")
+    public List<LabGlasswareDTO> getLabglasswareByID(@PathVariable String name) {
+        var labGlassware = labGlasswareService.findLabGlasswareByName(name);
+        if (labGlassware.isEmpty()) {
+            throw new LabGlasswareException("Not found items with name: " + name);
         }
         return labGlassware;
     }

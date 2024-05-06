@@ -45,3 +45,30 @@ CREATE TABLE glass_joint
     lab_glassware_id BIGINT,
     FOREIGN KEY (lab_glassware_id) REFERENCES lab_glassware (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE USERS (
+                       USERNAME NVARCHAR2(128) PRIMARY KEY,
+                       PASSWORD NVARCHAR2(128) NOT NULL,
+                       ENABLED CHAR(1) CHECK (ENABLED IN ('Y','N') ) NOT NULL
+);
+
+
+CREATE TABLE AUTHORITIES (
+                             USERNAME NVARCHAR2(128) NOT NULL,
+                             AUTHORITY NVARCHAR2(128) NOT NULL
+);
+ALTER TABLE AUTHORITIES ADD CONSTRAINT AUTHORITIES_UNIQUE UNIQUE (USERNAME, AUTHORITY);
+ALTER TABLE AUTHORITIES ADD CONSTRAINT AUTHORITIES_FK1 FOREIGN KEY (USERNAME) REFERENCES USERS (USERNAME) ENABLE;
+
+
+
+INSERT INTO users (username, password, enabled) VALUES
+                                                    ('User', '{noop}123', true),
+                                                    ('Manager', '{noop}1234', true),
+                                                    ('Admin', '{noop}12345', true);
+
+INSERT INTO authorities (username, authority) VALUES
+                                                  ('User', 'ROLE_USER'),
+                                                  ('Manager', 'ROLE_MANAGER'),
+                                                  ('Admin', 'ROLE_ADMIN');

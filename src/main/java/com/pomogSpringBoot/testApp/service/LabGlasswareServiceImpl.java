@@ -58,13 +58,18 @@ public class LabGlasswareServiceImpl implements LabGlasswareService{
     }
     
     @Override
-    public List<LabGlassware> findAllLabGlassware() {
-        return this.labGlasswareDAO.findAllLabGlassware();
+    public List<LabGlasswareDTO> findAllLabGlassware() {
+        return this.labGlasswareDAO
+                .findAllLabGlassware().stream()
+                .map(LabGlasswareDTO::new)
+                .collect(Collectors.toList());
     }
     
     @Override
-    public List<LabGlassware> findLabGlasswareByName(String name) {
-        return this.labGlasswareDAO.findLabGlasswareByName(name);
+    public List<LabGlasswareDTO> findLabGlasswareByName(String name) {
+        return this.labGlasswareDAO.findLabGlasswareByName(name).stream()
+                .map(LabGlasswareDTO::new)
+                .collect(Collectors.toList());
     }
     
     @Override
