@@ -72,3 +72,14 @@ INSERT INTO authorities (username, authority) VALUES
                                                   ('User', 'ROLE_USER'),
                                                   ('Manager', 'ROLE_MANAGER'),
                                                   ('Admin', 'ROLE_ADMIN');
+-- / BCRYPT
+INSERT INTO users (username, password, enabled) VALUES
+                                                    ('User', '{bcrypt}$2a$10$eFMKuSrI805o5QXiCbLU8uG0ZskOvjUeQiWq78JCM1HQlKbWkQXgS', true),
+                                                    ('Manager', '{bcrypt}$2a$10$ZjKzaS7Yfk9QcvLs2f40buk15MI/amXP4OiXIk9gS9t5tg1DX0RD2', true),
+                                                    ('Admin', '{bcrypt}$2a$10$6sGEsmILZa203/tlVvETtu8sT3JiCR4uNJSnor1WqeutsKWbq6oICS', true);
+
+INSERT INTO authorities (username, authority) VALUES
+                                                  ('User', 'ROLE_USER'),
+                                                  ('Manager', 'ROLE_MANAGER'),
+                                                  ('Admin', 'ROLE_ADMIN');
+
