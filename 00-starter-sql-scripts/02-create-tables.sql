@@ -83,3 +83,10 @@ INSERT INTO authorities (username, authority) VALUES
                                                   ('Manager', 'ROLE_MANAGER'),
                                                   ('Admin', 'ROLE_ADMIN');
 
+
+
+INSERT INTO users (username, password, enabled, email) VALUES
+    ('AdminMan', '$2a$10$6sGEsmILZa203/tlVvETtu8sT3JiCR4uNJSnor1WqeutsKWbq6oICS', true,'test@gmail.com');
+
+INSERT INTO authorities (username, authority) VALUES
+    ('AdminMan', 'ROLE_ADMIN');
