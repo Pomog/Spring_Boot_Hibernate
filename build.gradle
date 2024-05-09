@@ -51,6 +51,10 @@ dependencies {
 
 	// Spring Boot Starter Data JPA
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '3.2.4'
+
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.2.5'
+
 }
 
 tasks.named('test') {
