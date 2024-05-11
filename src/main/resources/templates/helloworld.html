@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Thymeleaf Test</title>
+    <link rel="stylesheet" th:href="@{/test.css}"/>
 </head>
 <body>
-    <p th:text="'Time on the server is ' + ${theDate}"/>
+    <p th:text="'Time on the server is ' + ${theDate}" class="funny" />
+    <br>
+    <span th:text="${param.name}" />
+    <span th:text="${message}" />
+    <span style="color:blue">blue</span>
 
 </body>
 </html>
