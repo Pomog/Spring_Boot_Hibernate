@@ -50,6 +50,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.PUT, "/api/**").hasAnyRole(UserRole.MANAGER.name(), UserRole.ADMIN.name())
                         .requestMatchers(HttpMethod.DELETE, "/api/**").hasRole(UserRole.ADMIN.name())
                         .requestMatchers(HttpMethod.GET, "/**").hasRole(UserRole.ADMIN.name())
+                        .requestMatchers(HttpMethod.POST, "/**").hasRole(UserRole.ADMIN.name())
         );
         http.httpBasic(Customizer.withDefaults());
         http.csrf(AbstractHttpConfigurer::disable);
