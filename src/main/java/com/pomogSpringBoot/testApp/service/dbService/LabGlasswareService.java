@@ -1,8 +1,7 @@
-package com.pomogSpringBoot.testApp.service;
+package com.pomogSpringBoot.testApp.service.dbService;
 
 import com.pomogSpringBoot.testApp.dto.LabGlasswareDTO;
 import com.pomogSpringBoot.testApp.entity.LabGlassware;
-import org.springdoc.core.annotations.RouterOperations;
 
 import java.util.List;
 public interface LabGlasswareService {

@@ -1,13 +1,14 @@
 package model;
 
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Component
 public class LabGlasswareModel {
     private String name;
     private String material;

@@ -1,4 +1,4 @@
-package com.pomogSpringBoot.testApp.service;
+package com.pomogSpringBoot.testApp.service.dbService;
 
 import com.pomogSpringBoot.testApp.dao.LabGlasswareDAO;
 import com.pomogSpringBoot.testApp.dao.LabGlasswareRepository;
@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 public class LabGlasswareServiceImpl implements LabGlasswareService{
     private final LabGlasswareDAO labGlasswareDAO;
     private final LabGlasswareRepository labGlasswareRepository;
+
     
     @Autowired
     public LabGlasswareServiceImpl(LabGlasswareDAO labGlasswareDAO, LabGlasswareRepository labGlasswareRepository) {

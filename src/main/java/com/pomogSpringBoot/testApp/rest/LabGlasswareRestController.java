@@ -3,7 +3,7 @@ package com.pomogSpringBoot.testApp.rest;
 import com.pomogSpringBoot.testApp.dto.LabGlasswareDTO;
 import com.pomogSpringBoot.testApp.entity.LabGlassware;
 import com.pomogSpringBoot.testApp.errorRespose.LabGlasswareException;
-import com.pomogSpringBoot.testApp.service.LabGlasswareService;
+import com.pomogSpringBoot.testApp.service.dbService.LabGlasswareService;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

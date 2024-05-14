@@ -1,4 +1,4 @@
-package com.pomogSpringBoot.testApp.service;
+package com.pomogSpringBoot.testApp.service.dbService;
 
 import com.pomogSpringBoot.testApp.dao.AuthorityDAO;
 import com.pomogSpringBoot.testApp.dao.UserDao;

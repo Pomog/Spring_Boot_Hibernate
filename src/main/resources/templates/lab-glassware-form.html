@@ -12,15 +12,17 @@
     <div class="row">
         <div class="col-lg-3">
 
-            <tr th:each="jointType: ${jointTypes}">
-                <td th:text="${jointType}" />
-            </tr>
-
             <form th:action="@{/processLabGlasswareForm}" th:object="${labGlasswareModel}" method="POST">
 
-                <div class="form-group">
+                <div class="form-group has-validation">
                     <label for="name">Name:</label>
-                    <input type="text" class="form-control" th:field="${labGlasswareModel.name}" id="name" name="name"/><br/>
+                    <input required type="text" class="form-control" th:field="${labGlasswareModel.name}" id="name" name="name"/><br/>
+                </div>
+
+                <div class="form-group has-validation">
+                    <label for="capacityML">Capacity (ml):</label>
+                    <input required class="form-control" type="number" th:field="${labGlasswareModel.capacityML}" id="capacityML"
+                           name="capacityML"/><br/>
                 </div>
 
                 <div class="form-group">
@@ -81,12 +83,6 @@
                            name="provider"/><br/>
                 </div>
 
-                <div class="form-group">
-                    <label for="capacityML">Capacity (ml):</label>
-                    <input class="form-control" type="number" th:field="${labGlasswareModel.capacityML}" id="capacityML"
-                           name="capacityML"/><br/>
-                </div>
-
                 <div id="glassJointsContainer" class="mb-3">
 
                 </div>
@@ -108,8 +104,56 @@
     </div>
 </div>
 
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const jointTypesList = [[${jointTypesList}]];
+    /*]]>*/
+</script>
+
 <script>
     function addGlassJoint() {
+        const container = document.getElementById("glassJointsContainer");
+        const div = document.createElement("div");
+        div.classList.add("glass-joint");
+
+        const select = document.createElement("select");
+        select.classList.add("form-select");
+        select.setAttribute("required", "required");
+
+        const option = document.createElement("option");
+        option.setAttribute("value", "");
+        option.setAttribute("disabled", "disabled");
+        option.setAttribute("selected", "selected");
+        option.appendChild(document.createTextNode("Select join type"));
+        select.appendChild(option);
+
+        jointTypesList.forEach(function(jointType) {
+            const option = document.createElement("option");
+            option.setAttribute("value", jointType);
+            option.appendChild(document.createTextNode(jointType));
+            select.appendChild(option);
+        });
+
+        div.appendChild(select);
+
+        const input = document.createElement("input");
+        input.setAttribute("type", "text");
+        input.classList.add("form-control");
+        input.setAttribute("name", "sizeDesignations");
+        input.setAttribute("placeholder", "Size Designation");
+        input.setAttribute("required", "required");
+        div.appendChild(input);
+
+        // Add hidden input for jointType
+        select.addEventListener("change", function() {
+            const hiddenInputJointType = document.createElement("input");
+            hiddenInputJointType.setAttribute("type", "hidden");
+            hiddenInputJointType.setAttribute("name", "jointTypes");
+            hiddenInputJointType.setAttribute("value", select.value);
+            div.appendChild(hiddenInputJointType);
+        });
+
+        container.appendChild(div);
     }
 </script>
 

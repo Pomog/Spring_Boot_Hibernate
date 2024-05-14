@@ -1,7 +1,7 @@
 package com.pomogSpringBoot.testApp.config.security;
 
 import com.pomogSpringBoot.testApp.config.UserRole;
-import com.pomogSpringBoot.testApp.service.UserService;
+import com.pomogSpringBoot.testApp.service.dbService.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
