@@ -19,10 +19,12 @@ public class LabGlasswareModelController {
     @GetMapping("/lab-glassware-form")
     public String showForm(Model theModel) {
         LabGlasswareModel labGlasswareModel = new LabGlasswareModel();
+        
 
         logger.info("Joint types: {}", (Object) JointType.values());
 
         theModel.addAttribute("labGlasswareModel", labGlasswareModel);
+        theModel.addAttribute("jointTypes", JointType.values());
         
         return "lab-glassware-form";
     }

@@ -12,6 +12,10 @@
     <div class="row">
         <div class="col-lg-3">
 
+            <tr th:each="jointType: ${jointTypes}">
+                <td th:text="${jointType}" />
+            </tr>
+
             <form th:action="@{/processLabGlasswareForm}" th:object="${labGlasswareModel}" method="POST">
 
                 <div class="form-group">
@@ -83,14 +87,13 @@
                            name="capacityML"/><br/>
                 </div>
 
-                <div id="glassJointFields" class="mb-3">
+                <div id="glassJointsContainer" class="mb-3">
 
                 </div>
 
                 <div class="row-cols-lg-auto">
                     <div>
-                        <button type="button" class="btn btn-secondary">Add Glass Joint
-                        </button>
+                        <button type="button" onclick="addGlassJoint()">Add Glass Joint</button>
                     </div>
                 </div>
 
@@ -104,6 +107,11 @@
         </div>
     </div>
 </div>
+
+<script>
+    function addGlassJoint() {
+    }
+</script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
