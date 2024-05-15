@@ -16,7 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LabGlasswareDTO {
     
-    @NonNull
+   
     private String name;
     
     private String material;
@@ -36,7 +36,8 @@ public class LabGlasswareDTO {
     private BigDecimal price;
     
     private String provider;
-    
+
+    @NonNull
     private Integer capacityML;
     
     private List<GlassJointDTO> glassJointsDTO=new ArrayList<>();
@@ -65,7 +66,7 @@ public class LabGlasswareDTO {
         this.glassJointsDTO.add(glassJointDTO);
     }
     
-    public void addGlassJoints (List<GlassJointDTO> glassJointsDTO){
+    public void setGlassJoints (List<GlassJointDTO> glassJointsDTO){
         glassJointsDTO.forEach(this::addGlassJoint);
     }
 }

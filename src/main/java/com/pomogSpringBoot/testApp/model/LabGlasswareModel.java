@@ -1,4 +1,4 @@
-package model;
+package com.pomogSpringBoot.testApp.model;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;

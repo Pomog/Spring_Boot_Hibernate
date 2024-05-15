@@ -7,11 +7,12 @@ import com.pomogSpringBoot.testApp.errorRespose.error.CoreError;
 import com.pomogSpringBoot.testApp.service.dataService.ObjectTranformer;
 import com.pomogSpringBoot.testApp.service.dbService.LabGlasswareService;
 import com.pomogSpringBoot.testApp.service.validators.ModelValidator;
-import model.GlassJointModel;
-import model.LabGlasswareModel;
+import com.pomogSpringBoot.testApp.model.GlassJointModel;
+import com.pomogSpringBoot.testApp.model.LabGlasswareModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ import java.util.List;
 
 @Controller
 public class LabGlasswareModelController {
+    @Qualifier("LabGlasswareModelValidator")
     private final ModelValidator validator;
     private final ObjectTranformer<LabGlasswareModel, LabGlassware> objectTranformer;
     
@@ -71,7 +73,6 @@ public class LabGlasswareModelController {
     }
     
     private static void extractModel(LabGlasswareModel labGlasswareModel, List<String> jointTypes, List<String> sizeDesignations) {
-        // Create and add GlassJointModel instances
         for (int i = 0; i < jointTypes.size(); i++) {
             GlassJointModel glassJointModel = new GlassJointModel();
             glassJointModel.setType(JointType.valueOf(jointTypes.get(i))); // Assuming JointType is an enum

@@ -2,7 +2,7 @@ package com.pomogSpringBoot.testApp.service.dataService;
 
 import com.pomogSpringBoot.testApp.entity.GlassJoint;
 import com.pomogSpringBoot.testApp.entity.LabGlassware;
-import model.LabGlasswareModel;
+import com.pomogSpringBoot.testApp.model.LabGlasswareModel;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;

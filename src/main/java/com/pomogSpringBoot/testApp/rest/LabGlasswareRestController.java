@@ -39,7 +39,7 @@ public class LabGlasswareRestController {
     }
     
     @GetMapping("/labglasswareName/{name}")
-    public List<LabGlasswareDTO> getLabglasswareByID(@PathVariable String name) {
+    public List<LabGlasswareDTO> getLabglasswareByName(@PathVariable String name) {
         var labGlassware = labGlasswareService.findLabGlasswareByName(name);
         if (labGlassware.isEmpty()) {
             throw new LabGlasswareException("Not found items with name: " + name);

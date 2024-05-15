@@ -1,4 +1,4 @@
-package model;
+package com.pomogSpringBoot.testApp.model;
 
 import com.pomogSpringBoot.testApp.entity.JointType;
 import lombok.Data;
