@@ -26,6 +26,14 @@ public class LabGlassware {
     @NonNull
     private String name;
     
+    @Column(name = "isBroken")
+    @NonNull
+    private Boolean broken;
+    
+    @Column(name = "isRepaired")
+    @NonNull
+    private Boolean repaired;
+    
     @Column(name = "material")
     private String material;
     

@@ -12,6 +12,8 @@ import java.util.List;
 public class LabGlasswareModel {
     private String name;
     private String material;
+    private Boolean broken;
+    private Boolean repaired;
     private String manufacturer;
     private String location;
     private String status;

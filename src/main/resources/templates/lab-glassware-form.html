@@ -16,12 +16,14 @@
 
                 <div class="form-group has-validation">
                     <label for="name">Name:</label>
-                    <input required type="text" class="form-control" th:field="${labGlasswareModel.name}" id="name" name="name"/><br/>
+                    <input required type="text" class="form-control" th:field="${labGlasswareModel.name}" id="name"
+                           name="name"/><br/>
                 </div>
 
                 <div class="form-group has-validation">
                     <label for="capacityML">Capacity (ml):</label>
-                    <input required class="form-control" type="number" th:field="${labGlasswareModel.capacityML}" id="capacityML"
+                    <input required class="form-control" type="number" th:field="${labGlasswareModel.capacityML}"
+                           id="capacityML"
                            name="capacityML"/><br/>
                 </div>
 
@@ -83,10 +85,38 @@
                            name="provider"/><br/>
                 </div>
 
+                <div class="form-group has-validation">
+                    <label class="form-check-label" for="original"></label>
+                    <input required class="form-check-input" type="radio"
+                           id="original"
+                           th:field="${labGlasswareModel.broken}"
+                           th:value="false">In one piece</input>
+                    <label class="form-check-label" for="broken"></label>
+                    <input required class="form-check-input" type="radio"
+                           id="broken"
+                           th:field="${labGlasswareModel.broken}"
+                           th:value="true">Broken</input>
+                    <br/>
+                </div>
+
+                <div class="form-group has-validation">
+                    <label class="form-check-label" for="primary"></label>
+                    <input required class="form-check-input" type="radio"
+                           id="primary"
+                           th:field="${labGlasswareModel.repaired}"
+                           th:value="false">Primary</input>
+                    <label class="form-check-label" for="repaired"></label>
+                    <input required class="form-check-input" type="radio"
+                           id="repaired"
+                           th:field="${labGlasswareModel.repaired}"
+                           th:value="true">Repaired</input>
+                    <br/>
+                </div>
+
                 <div id="glassJointsContainer" class="mb-3">
 
                 </div>
-<!--                Here by Using addGlassJoint() function new fields for the Glass Join can be created-->
+                <!--                Here by Using addGlassJoint() function new fields for the Glass Join can be created-->
                 <div class="row-cols-lg-auto">
                     <div>
                         <button type="button" onclick="addGlassJoint()">Add Glass Joint</button>
@@ -104,8 +134,15 @@
     </div>
 </div>
 
-<script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
     const jointTypesList = [[${jointTypesList}]];
+    /*]]>*/
+</script>
+
+<script>
+    console.log(jointTypesList)
+
     function addGlassJoint() {
         const container = document.getElementById("glassJointsContainer");
         const div = document.createElement("div");
@@ -123,7 +160,7 @@
         option.appendChild(document.createTextNode("Select join type"));
         select.appendChild(option);
 
-        jointTypesList.forEach(function(jointType) {
+        jointTypesList.forEach(function (jointType) {
             const option = document.createElement("option");
             option.setAttribute("value", jointType);
             option.appendChild(document.createTextNode(jointType));
@@ -144,8 +181,8 @@
     }
 </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-            crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
 </html>

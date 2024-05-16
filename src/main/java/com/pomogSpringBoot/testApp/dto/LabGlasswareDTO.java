@@ -15,28 +15,20 @@ import java.util.List;
 @NoArgsConstructor
 @RequiredArgsConstructor
 public class LabGlasswareDTO {
-    
-   
+    @NonNull
     private String name;
-    
     private String material;
+    private Boolean broken;
+    private Boolean repaired;
     
     private String manufacturer;
-    
     private String location;
-    
     private String status;
-    
     private Date purchaseDate;
-    
     private Date calibrationDate;
-    
     private Date lastMaintenanceDate;
-    
     private BigDecimal price;
-    
     private String provider;
-
     @NonNull
     private Integer capacityML;
     
@@ -45,6 +37,8 @@ public class LabGlasswareDTO {
     public LabGlasswareDTO(LabGlassware labGlassware) {
         this.name = labGlassware.getName();
         this.material = labGlassware.getMaterial();
+        this.broken = labGlassware.getBroken();
+        this.repaired = labGlassware.getRepaired();
         this.manufacturer = labGlassware.getManufacturer();
         this.location = labGlassware.getLocation();
         this.status = labGlassware.getStatus();
