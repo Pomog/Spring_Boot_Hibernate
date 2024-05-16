@@ -104,13 +104,8 @@
     </div>
 </div>
 
-<script th:inline="javascript">
-    /*<![CDATA[*/
-    const jointTypesList = [[${jointTypesList}]];
-    /*]]>*/
-</script>
-
 <script>
+    const jointTypesList = [[${jointTypesList}]];
     function addGlassJoint() {
         const container = document.getElementById("glassJointsContainer");
         const div = document.createElement("div");
@@ -119,6 +114,7 @@
         const select = document.createElement("select");
         select.classList.add("form-select");
         select.setAttribute("required", "required");
+        select.setAttribute("name", "jointTypes");
 
         const option = document.createElement("option");
         option.setAttribute("value", "");
@@ -143,15 +139,6 @@
         input.setAttribute("placeholder", "Size Designation");
         input.setAttribute("required", "required");
         div.appendChild(input);
-
-        // Add hidden input for jointType
-        select.addEventListener("change", function() {
-            const hiddenInputJointType = document.createElement("input");
-            hiddenInputJointType.setAttribute("type", "hidden");
-            hiddenInputJointType.setAttribute("name", "jointTypes");
-            hiddenInputJointType.setAttribute("value", select.value);
-            div.appendChild(hiddenInputJointType);
-        });
 
         container.appendChild(div);
     }
