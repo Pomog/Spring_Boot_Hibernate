@@ -22,12 +22,14 @@ public class ModelToEntityTransformer implements ObjectTranformer<LabGlasswareMo
         labGlassware.setPrice(source.getPrice());
         labGlassware.setProvider(source.getProvider());
         labGlassware.setCapacityML(source.getCapacityML());
+
+        labGlassware.setPurchaseDate(parseStringToSQLDate(source.getPurchaseDate()));
         
-        labGlassware.setPurchaseDate(Date.valueOf(source.getPurchaseDate()));
-        labGlassware.setCalibrationDate(Date.valueOf(source.getCalibrationDate()));
-        labGlassware.setLastMaintenanceDate(Date.valueOf(source.getLastMaintenanceDate()));
+        labGlassware.setCalibrationDate(parseStringToSQLDate(source.getCalibrationDate()));
         
-        if (!source.getGlassJoints().isEmpty()) {
+        labGlassware.setLastMaintenanceDate(parseStringToSQLDate(source.getLastMaintenanceDate()));
+        
+        if (source.getGlassJoints() != null && !source.getGlassJoints().isEmpty()) {
             source.getGlassJoints().forEach(glassJointModel ->{
                 GlassJoint glassJoint = new GlassJoint(glassJointModel.getType(), glassJointModel.getSizeDesignation());
                 glassJoint.setLabGlassware(labGlassware);
@@ -35,5 +37,9 @@ public class ModelToEntityTransformer implements ObjectTranformer<LabGlasswareMo
             });
         }
         return labGlassware;
+    }
+    
+    private Date parseStringToSQLDate(String dateFromTheHTTP){
+        return dateFromTheHTTP.isBlank() ? null : Date.valueOf(dateFromTheHTTP);
     }
 }

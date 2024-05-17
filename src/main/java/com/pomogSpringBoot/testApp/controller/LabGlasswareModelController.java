@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -52,8 +53,15 @@ public class LabGlasswareModelController {
     
     @PostMapping("/processLabGlasswareForm")
     public String processLabGlasswareSaveForm(@ModelAttribute("labGlasswareModel") LabGlasswareModel labGlasswareModel,
-                                              @RequestParam("jointTypes") List<String> jointTypes,
-                                              @RequestParam("sizeDesignations") List<String> sizeDesignations) {
+                                              @RequestParam(value = "jointTypes", required = false) List<String> jointTypes,
+                                              @RequestParam(value = "sizeDesignations", required = false) List<String> sizeDesignations) {
+
+        if (jointTypes == null) {
+            jointTypes = new ArrayList<>();
+        }
+        if (sizeDesignations == null) {
+            sizeDesignations = new ArrayList<>();
+        }
         
         extractModel(labGlasswareModel, jointTypes, sizeDesignations);
         checkForErrors(labGlasswareModel);
@@ -73,11 +81,29 @@ public class LabGlasswareModelController {
     }
     
     private static void extractModel(LabGlasswareModel labGlasswareModel, List<String> jointTypes, List<String> sizeDesignations) {
+        if (jointTypes.size() != sizeDesignations.size()) {
+            throw new IllegalArgumentException("The size of jointTypes and sizeDesignations must be the same");
+        }
+        
         for (int i = 0; i < jointTypes.size(); i++) {
             GlassJointModel glassJointModel = new GlassJointModel();
-            glassJointModel.setType(JointType.valueOf(jointTypes.get(i))); // Assuming JointType is an enum
-            glassJointModel.setSizeDesignation(sizeDesignations.get(i));
+
+            String jointType = jointTypes.get(i);
+            if (jointType != null && !jointType.isEmpty()) {
+                try {
+                    glassJointModel.setType(JointType.valueOf(jointType));
+                } catch (IllegalArgumentException e) {
+                    throw new IllegalArgumentException("Invalid JointType: " + jointType, e);
+                }
+            }
+            
+            String sizeDesignation = sizeDesignations.get(i);
+            if (sizeDesignation != null && !sizeDesignation.isEmpty()) {
+                glassJointModel.setSizeDesignation(sizeDesignation);
+            }
+            
             labGlasswareModel.addGlassJoint(glassJointModel);
         }
     }
+
 }

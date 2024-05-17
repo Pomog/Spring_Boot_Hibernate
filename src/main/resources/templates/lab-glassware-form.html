@@ -10,7 +10,7 @@
 <div class="container">
     <h3>LabGlassware Registration Form</h3>
     <div class="row">
-        <div class="col-lg-3">
+        <div class="col-lg-6">
 
             <form th:action="@{/processLabGlasswareForm}" th:object="${labGlasswareModel}" method="POST">
 
@@ -141,8 +141,6 @@
 </script>
 
 <script>
-    console.log(jointTypesList)
-
     function addGlassJoint() {
         const container = document.getElementById("glassJointsContainer");
         const div = document.createElement("div");
@@ -176,6 +174,7 @@
         input.setAttribute("placeholder", "Size Designation");
         input.setAttribute("required", "required");
         div.appendChild(input);
+        div.appendChild(document.createElement("br"));
 
         container.appendChild(div);
     }

@@ -69,7 +69,7 @@ public class LabGlassware {
             mappedBy = "labGlassware",
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
-    private List<GlassJoint> glassJoints;
+    private List<GlassJoint> glassJoints = new ArrayList<>();
 
     public void addGlassJoint(GlassJoint glassJoint) {
         if (glassJoints == null) {

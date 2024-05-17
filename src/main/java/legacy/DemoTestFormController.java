@@ -1,4 +1,4 @@
-package com.pomogSpringBoot.testApp.controller;
+package legacy;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
