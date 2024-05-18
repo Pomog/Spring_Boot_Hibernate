@@ -9,12 +9,14 @@ import com.pomogSpringBoot.testApp.service.dbService.LabGlasswareService;
 import com.pomogSpringBoot.testApp.service.validators.ModelValidator;
 import com.pomogSpringBoot.testApp.model.GlassJointModel;
 import com.pomogSpringBoot.testApp.model.LabGlasswareModel;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,19 +45,25 @@ public class LabGlasswareModelController {
     
     @GetMapping("/lab-glassware-form")
     public String showForm(Model theModel) {
-        LabGlasswareModel labGlasswareModel = new LabGlasswareModel();
 
-        theModel.addAttribute("labGlasswareModel", labGlasswareModel);
+        theModel.addAttribute("labGlasswareModel", new LabGlasswareModel());
         theModel.addAttribute("jointTypesList", JointType.values());
         
         return "lab-glassware-form";
     }
     
     @PostMapping("/processLabGlasswareForm")
-    public String processLabGlasswareSaveForm(@ModelAttribute("labGlasswareModel") LabGlasswareModel labGlasswareModel,
-                                              @RequestParam(value = "jointTypes", required = false) List<String> jointTypes,
-                                              @RequestParam(value = "sizeDesignations", required = false) List<String> sizeDesignations) {
+    public String processLabGlasswareSaveForm(
+            @Valid
+            @ModelAttribute("labGlasswareModel") LabGlasswareModel labGlasswareModel,
+            BindingResult bindingResult,
+            @RequestParam(value = "jointTypes", required = false) List<String> jointTypes,
+            @RequestParam(value = "sizeDesignations", required = false) List<String> sizeDesignations) {
 
+        if (bindingResult.hasErrors()){
+            return "lab-glassware-form";
+        }
+        
         if (jointTypes == null) {
             jointTypes = new ArrayList<>();
         }

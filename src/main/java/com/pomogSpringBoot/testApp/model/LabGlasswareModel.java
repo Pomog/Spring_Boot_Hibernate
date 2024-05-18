@@ -1,5 +1,7 @@
 package com.pomogSpringBoot.testApp.model;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
@@ -10,9 +12,13 @@ import java.util.List;
 @Data
 @Component
 public class LabGlasswareModel {
+    @NotNull(message = "Lab Glassware name is required")
+    @Size(min=1,max = 50, message = "inappropriate Lab Glassware name")
     private String name;
     private String material;
+    @NotNull(message = "Lab Glassware conditions is required")
     private Boolean broken;
+    @NotNull(message = "Lab Glassware conditions is required")
     private Boolean repaired;
     private String manufacturer;
     private String location;
@@ -22,6 +28,7 @@ public class LabGlasswareModel {
     private String lastMaintenanceDate;
     private BigDecimal price;
     private String provider;
+    @NotNull(message = "Lab Glassware capacity is required")
     private Integer capacityML;
     private List<GlassJointModel> glassJoints = new ArrayList<>();
     

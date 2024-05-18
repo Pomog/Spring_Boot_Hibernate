@@ -4,3 +4,14 @@
     font-size: large;
     padding-left: 150px;
 }
+
+.label{
+    font-style: italic;
+    color: blueviolet;
+    font-size: medium;
+    padding-left: 15px;
+}
+
+.form-error{
+    color: red;
+}
