@@ -14,13 +14,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +30,8 @@ public class LabGlasswareModelController {
     @Qualifier("LabGlasswareModelValidator")
     private final ModelValidator validator;
     private final ObjectTranformer<LabGlasswareModel, LabGlassware> objectTranformer;
-    
     private final LabGlasswareService labGlasswareService;
+    private static final Logger logger = LoggerFactory.getLogger(LabGlasswareModelController.class);
     
     @Autowired
     public LabGlasswareModelController(ModelValidator validator, ObjectTranformer<LabGlasswareModel, LabGlassware> objectTranformer, LabGlasswareService labGlasswareService) {
@@ -41,7 +40,12 @@ public class LabGlasswareModelController {
         this.labGlasswareService = labGlasswareService;
     }
     
-    private static final Logger logger = LoggerFactory.getLogger(LabGlasswareModelController.class);
+    @InitBinder
+    public void stringTrimmer(WebDataBinder webDataBinder){
+        StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+        webDataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
+    }
+    
     
     @GetMapping("/lab-glassware-form")
     public String showForm(Model theModel) {
