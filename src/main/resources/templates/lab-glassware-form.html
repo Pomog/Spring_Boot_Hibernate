@@ -27,7 +27,11 @@
                 <label for="capacityML">Capacity (ml):</label>
                 <input required class="form-control" type="number" th:field="${labGlasswareModel.capacityML}"
                        id="capacityML"
-                       name="capacityML"/><br/>
+                       name="capacityML"/>
+                <span th:if="${#fields.hasErrors('capacityML')}"
+                      th:errors="*{capacityML}"
+                      class="form-error"></span>
+                <br/>
             </div>
 
             <div class="form-group">

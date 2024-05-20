@@ -1,5 +1,6 @@
 package com.pomogSpringBoot.testApp.model;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -13,7 +14,7 @@ import java.util.List;
 @Component
 public class LabGlasswareModel {
     @NotNull(message = "Lab Glassware name is required")
-    @Size(min=1,max = 50, message = "inappropriate Lab Glassware name")
+    @Size(min = 1, max = 50, message = "inappropriate Lab Glassware name")
     private String name;
     private String material;
     @NotNull(message = "Lab Glassware conditions is required")
@@ -26,13 +27,15 @@ public class LabGlasswareModel {
     private String purchaseDate;
     private String calibrationDate;
     private String lastMaintenanceDate;
+    @Min(value = 0, message = "must be greater or equal to 0")
     private BigDecimal price;
     private String provider;
     @NotNull(message = "Lab Glassware capacity is required")
+    @Min(value = 0, message = "must be greater or equal to 0")
     private Integer capacityML;
     private List<GlassJointModel> glassJoints = new ArrayList<>();
     
-    public void addGlassJoint(GlassJointModel glassJointModel){
+    public void addGlassJoint(GlassJointModel glassJointModel) {
         this.glassJoints.add(glassJointModel);
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.sql.Date;
 
 @Component
-public class ModelToEntityTransformer implements ObjectTranformer<LabGlasswareModel, LabGlassware>{
+public class ModelToEntityTransformer implements ObjectTranformer<LabGlasswareModel, LabGlassware> {
     @Override
     public LabGlassware transform(LabGlasswareModel source) {
         LabGlassware labGlassware = new LabGlassware();
@@ -22,15 +22,21 @@ public class ModelToEntityTransformer implements ObjectTranformer<LabGlasswareMo
         labGlassware.setPrice(source.getPrice());
         labGlassware.setProvider(source.getProvider());
         labGlassware.setCapacityML(source.getCapacityML());
-
-        labGlassware.setPurchaseDate(parseStringToSQLDate(source.getPurchaseDate()));
         
-        labGlassware.setCalibrationDate(parseStringToSQLDate(source.getCalibrationDate()));
+        if (source.getPurchaseDate() != null && !source.getPurchaseDate().isBlank()) {
+            labGlassware.setPurchaseDate(parseStringToSQLDate(source.getPurchaseDate()));
+        }
         
-        labGlassware.setLastMaintenanceDate(parseStringToSQLDate(source.getLastMaintenanceDate()));
+        if (source.getCalibrationDate() != null && !source.getCalibrationDate().isBlank()) {
+            labGlassware.setCalibrationDate(parseStringToSQLDate(source.getCalibrationDate()));
+        }
+        
+        if (source.getLastMaintenanceDate() != null && !source.getLastMaintenanceDate().isBlank()) {
+            labGlassware.setLastMaintenanceDate(parseStringToSQLDate(source.getLastMaintenanceDate()));
+        }
         
         if (source.getGlassJoints() != null && !source.getGlassJoints().isEmpty()) {
-            source.getGlassJoints().forEach(glassJointModel ->{
+            source.getGlassJoints().forEach(glassJointModel -> {
                 GlassJoint glassJoint = new GlassJoint(glassJointModel.getType(), glassJointModel.getSizeDesignation());
                 glassJoint.setLabGlassware(labGlassware);
                 labGlassware.addGlassJoint(glassJoint);
@@ -39,7 +45,7 @@ public class ModelToEntityTransformer implements ObjectTranformer<LabGlasswareMo
         return labGlassware;
     }
     
-    private Date parseStringToSQLDate(String dateFromTheHTTP){
+    private Date parseStringToSQLDate(String dateFromTheHTTP) {
         return dateFromTheHTTP.isBlank() ? null : Date.valueOf(dateFromTheHTTP);
     }
 }

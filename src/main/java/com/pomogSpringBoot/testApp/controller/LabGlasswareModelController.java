@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +62,7 @@ public class LabGlasswareModelController {
             @Valid
             @ModelAttribute("labGlasswareModel") LabGlasswareModel labGlasswareModel,
             BindingResult bindingResult,
+            RedirectAttributes redirectAttributes,
             @RequestParam(value = "jointTypes", required = false) List<String> jointTypes,
             @RequestParam(value = "sizeDesignations", required = false) List<String> sizeDesignations) {
 
@@ -80,7 +82,8 @@ public class LabGlasswareModelController {
         
         LabGlassware labGlassware = objectTranformer.transform(labGlasswareModel);
         labGlasswareService.save(labGlassware);
-
+        
+        redirectAttributes.addFlashAttribute("successMessage", "Lab Glassware saved successfully.");
         return "lab-glassware-confirmation";
     }
     
