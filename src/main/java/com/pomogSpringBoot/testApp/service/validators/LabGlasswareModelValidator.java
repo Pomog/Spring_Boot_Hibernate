@@ -30,5 +30,9 @@ public class LabGlasswareModelValidator implements ModelValidator {
         if (labGlasswareModel.getCapacityML() == null || labGlasswareModel.getName().isEmpty()) {
             errors.add(new CoreError("Capacity", "Capacity cannot be empty"));
         }
+        
+        if (labGlasswareModel.getCapacityML() < 0) {
+            errors.add(new CoreError("Capacity", "must be greater or equal to 0"));
+        }
     }
 }

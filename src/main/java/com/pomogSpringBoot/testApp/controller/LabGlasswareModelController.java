@@ -65,7 +65,10 @@ public class LabGlasswareModelController {
             RedirectAttributes redirectAttributes,
             @RequestParam(value = "jointTypes", required = false) List<String> jointTypes,
             @RequestParam(value = "sizeDesignations", required = false) List<String> sizeDesignations) {
-
+        
+        System.out.println("bindingResult");
+        System.out.println(bindingResult);
+        
         if (bindingResult.hasErrors()){
             return "lab-glassware-form";
         }
