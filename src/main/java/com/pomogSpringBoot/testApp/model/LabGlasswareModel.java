@@ -6,13 +6,14 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import java.lang.annotation.Annotation;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Component
-public class LabGlasswareModel {
+public class LabGlasswareModel implements Annotation {
     @NotNull(message = "Lab Glassware name is required")
     @Size(min = 1, max = 50, message = "inappropriate Lab Glassware name")
     private String name;
