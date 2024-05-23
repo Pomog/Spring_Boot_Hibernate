@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 public @interface FieldValidation {
     public String value() default "lab";
     public String message() default "must start from lab";
-    public Class<?>[] group() default {};
+    public Class<?>[] groups() default {};
     public Class<? extends Payload>[] payload() default {};
 
 }

@@ -50,7 +50,11 @@
             <div class="form-group">
                 <label for="location">Location:</label>
                 <input class="form-control" type="text" th:field="${labGlasswareModel.location}" id="location"
-                       name="location"/><br/>
+                       name="location"/>
+                <span th:if="${#fields.hasErrors('location')}"
+                      th:errors="*{location}"
+                      class="form-error"></span>
+                <br/>
             </div>
 
             <label for="status">Status:</label>
