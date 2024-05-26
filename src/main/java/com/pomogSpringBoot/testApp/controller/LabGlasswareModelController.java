@@ -1,5 +1,6 @@
 package com.pomogSpringBoot.testApp.controller;
 
+import com.pomogSpringBoot.testApp.dto.LabGlasswareDTO;
 import com.pomogSpringBoot.testApp.entity.JointType;
 import com.pomogSpringBoot.testApp.entity.LabGlassware;
 import com.pomogSpringBoot.testApp.errorRespose.LabGlasswareException;
@@ -47,10 +48,16 @@ public class LabGlasswareModelController {
         webDataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
     }
     
+    @GetMapping("/list")
+    public String listLabGlassware (Model theModel){
+        theModel.addAttribute("labGlassware", labGlasswareService.findAllLabGlassware());
+        
+        return "lab-glassware-list";
+    }
+    
     
     @GetMapping("/lab-glassware-form")
     public String showForm(Model theModel) {
-
         theModel.addAttribute("labGlasswareModel", new LabGlasswareModel());
         theModel.addAttribute("jointTypesList", JointType.values());
         
