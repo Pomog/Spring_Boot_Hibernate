@@ -18,9 +18,8 @@ public class LabGlasswareDTO {
     @NonNull
     private String name;
     private String material;
-    private Boolean broken;
-    private Boolean repaired;
-    
+    private Boolean broken = false;
+    private Boolean repaired = false;
     private String manufacturer;
     private String location;
     private String status;
@@ -37,8 +36,8 @@ public class LabGlasswareDTO {
     public LabGlasswareDTO(LabGlassware labGlassware) {
         this.name = labGlassware.getName();
         this.material = labGlassware.getMaterial();
-        this.broken = labGlassware.getBroken();
-        this.repaired = labGlassware.getRepaired();
+        this.broken = labGlassware.getBroken() != null ? labGlassware.getBroken() : false;
+        this.repaired = labGlassware.getRepaired() != null ? labGlassware.getRepaired() : false;
         this.manufacturer = labGlassware.getManufacturer();
         this.location = labGlassware.getLocation();
         this.status = labGlassware.getStatus();
