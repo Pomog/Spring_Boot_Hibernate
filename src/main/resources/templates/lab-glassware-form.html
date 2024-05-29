@@ -5,18 +5,18 @@
     <title>LabGlassware Form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/test.css">
+    <link rel="stylesheet" type="text/css" href="/glassware/CSS/test.css">
 </head>
 <body>
 <div class="container">
-    <h3>LabGlassware Registration Form</h3>
+    <h3 class="funny">LabGlassware Registration Form</h3>
     <div class="col-lg-6">
 
         <form th:action="@{/processLabGlasswareForm}" th:object="${labGlasswareModel}" method="POST">
 
             <div class="form-group">
-                <span class="label">Name:</span>
-                <input type="text" class="form-control" th:field="${labGlasswareModel.name}"/>
+                <label class="label" for="name">Name:</label>
+                <input type="text" class="form-control" th:field="${labGlasswareModel.name}" id="name"/>
                 <span th:if="${#fields.hasErrors('name')}"
                       th:errors="*{name}"
                       class="form-error"></span>
@@ -24,7 +24,7 @@
             </div>
 
             <div class="form-group has-validation">
-                <label for="capacityML">Capacity (ml):</label>
+                <label class="label" for="capacityML">Capacity (ml):</label>
                 <input required class="form-control" type="number" th:field="${labGlasswareModel.capacityML}"
                        id="capacityML"
                        name="capacityML"/>
@@ -35,20 +35,20 @@
             </div>
 
             <div class="form-group">
-                <label for="material">Material:</label>
+                <label class="label" for="material">Material:</label>
                 <input type="text" class="form-control" th:field="${labGlasswareModel.material}" id="material"
                        name="material"/><br/>
             </div>
 
             <div class="form-group">
-                <label for="manufacturer">Manufacturer:</label>
+                <label class="label" for="manufacturer">Manufacturer:</label>
                 <input class="form-control" type="text" th:field="${labGlasswareModel.manufacturer}"
                        id="manufacturer"
                        name="manufacturer"/><br/>
             </div>
 
             <div class="form-group">
-                <label for="location">Location:</label>
+                <label class="label" for="location">Location:</label>
                 <input class="form-control" type="text" th:field="${labGlasswareModel.location}" id="location"
                        name="location"/>
                 <span th:if="${#fields.hasErrors('location')}"
@@ -57,41 +57,41 @@
                 <br/>
             </div>
 
-            <label for="status">Status:</label>
+            <label class="label" for="status">Status:</label>
             <input class="form-control" type="text" th:field="${labGlasswareModel.status}" id="status"
                    name="status"/><br/>
 
 
             <div class="form-group">
-                <label for="purchaseDate">Purchase Date:</label>
+                <label class="label" for="purchaseDate">Purchase Date:</label>
                 <input class="form-control" type="date" th:field="${labGlasswareModel.purchaseDate}"
                        id="purchaseDate"
                        name="purchaseDate"/><br/>
             </div>
 
             <div class="form-group">
-                <label for="calibrationDate">Calibration Date:</label>
+                <label class="label" for="calibrationDate">Calibration Date:</label>
                 <input class="form-control" type="date" th:field="${labGlasswareModel.calibrationDate}"
                        id="calibrationDate"
                        name="calibrationDate"/><br/>
             </div>
 
             <div class="form-group">
-                <label for="lastMaintenanceDate">Last Maintenance Date:</label>
+                <label class="label" for="lastMaintenanceDate">Last Maintenance Date:</label>
                 <input class="form-control" type="date" th:field="${labGlasswareModel.lastMaintenanceDate}"
                        id="lastMaintenanceDate"
                        name="lastMaintenanceDate"/><br/>
             </div>
 
             <div class="form-group">
-                <label for="price">Price:</label>
+                <label class="label" for="price">Price:</label>
                 <input class="form-control" type="number" step="0.01" th:field="${labGlasswareModel.price}"
                        id="price"
                        name="price"/><br/>
             </div>
 
             <div class="form-group">
-                <label for="provider">Provider:</label>
+                <label class="label" for="provider">Provider:</label>
                 <input class="form-control" type="text" th:field="${labGlasswareModel.provider}" id="provider"
                        name="provider"/><br/>
             </div>
