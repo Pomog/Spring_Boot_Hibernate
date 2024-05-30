@@ -91,7 +91,7 @@ public class LabGlasswareModelController {
         labGlasswareService.save(labGlassware);
         
         redirectAttributes.addFlashAttribute("successMessage", "Lab Glassware saved successfully.");
-        return "lab-glassware-confirmation";
+        return "redirect:/list";
     }
     
     private void checkForErrors(LabGlasswareModel labGlasswareModel) {

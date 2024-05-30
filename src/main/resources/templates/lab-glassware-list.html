@@ -17,23 +17,23 @@
     class="btn btn-primary btn-sm mb-3">
         Add glassware
     </a>
-    <table class="table table-bordered table-striped">
+    <table id="sortableTable" class="table table-bordered table-striped">
         <thead class="table-dark">
         <tr>
-            <th>Name</th>
-            <th>Material</th>
-            <th>Broken</th>
-            <th>Repaired</th>
-            <th>Manufacturer</th>
-            <th>Location</th>
-            <th>Status</th>
-            <th>Purchase Date</th>
-            <th>Calibration Date</th>
-            <th>Last Maintenance Date</th>
-            <th>Price</th>
-            <th>Provider</th>
-            <th>Capacity (mL)</th>
-            <th>Glass Joints</th>
+            <th onclick="sortTable(0)">Name</th>
+            <th onclick="sortTable(1)">Material</th>
+            <th onclick="sortTable(2)">Broken</th>
+            <th onclick="sortTable(3)">Repaired</th>
+            <th onclick="sortTable(4)">Manufacturer</th>
+            <th onclick="sortTable(5)">Location</th>
+            <th onclick="sortTable(6)">Status</th>
+            <th onclick="sortTable(7)">Purchase Date</th>
+            <th onclick="sortTable(8)">Calibration Date</th>
+            <th onclick="sortTable(9)">Last Maintenance Date</th>
+            <th onclick="sortTable(10)">Price</th>
+            <th onclick="sortTable(11)">Provider</th>
+            <th onclick="sortTable(12)">Capacity (mL)</th>
+            <th onclick="sortTable(13)">Glass Joints</th>
         </tr>
         </thead>
         <tbody>
@@ -68,6 +68,51 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    let currentSortColumn = -1;
+    let currentSortOrder = 'asc'; // 'asc' for ascending, 'desc' for descending
+
+    function sortTable(columnIndex) {
+        const table = document.getElementById('sortableTable');
+        const tbody = table.tBodies[0];
+        const rows = Array.from(tbody.rows);
+
+        // Determine sort order
+        if (currentSortColumn === columnIndex) {
+            currentSortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc';
+        } else {
+            currentSortColumn = columnIndex;
+            currentSortOrder = 'asc';
+        }
+
+        // Remove previous sort indicators
+        Array.from(table.tHead.rows[0].cells).forEach((cell, idx) => {
+            cell.classList.remove('sort-asc', 'sort-desc');
+            if (idx === columnIndex) {
+                cell.classList.add(currentSortOrder === 'asc' ? 'sort-asc' : 'sort-desc');
+            }
+        });
+
+        // Sort rows
+        rows.sort((rowA, rowB) => {
+            const cellA = rowA.cells[columnIndex].textContent.trim();
+            const cellB = rowB.cells[columnIndex].textContent.trim();
+
+            if (currentSortOrder === 'asc') {
+                return cellA.localeCompare(cellB, undefined, {numeric: true, sensitivity: 'base'});
+            } else {
+                return cellB.localeCompare(cellA, undefined, {numeric: true, sensitivity: 'base'});
+            }
+        });
+
+        // Rebuild tbody with sorted rows
+        while (tbody.firstChild) {
+            tbody.removeChild(tbody.firstChild);
+        }
+        tbody.append(...rows);
+    }
+</script>
 
 </body>
 </html>

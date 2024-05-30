@@ -7,5 +7,7 @@
 <body>
 <h3>New Laboratory Glassware Registration Confirmed</h3>
 <span th:text="${labGlasswareModel.getName()} + ' ' + ${labGlasswareModel.getLocation()}" />
+<hr>
+<a th:href="@{/list}">Back to list</a>
 </body>
 </html>
