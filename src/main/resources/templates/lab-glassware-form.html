@@ -15,6 +15,9 @@
 
         <form th:action="@{/processLabGlasswareForm}" th:object="${labGlasswareModel}" method="POST">
 
+            <!-- Hidden ID field -->
+            <input type="hidden" th:field="${labGlasswareModel.id}" />
+
             <div class="form-group">
                 <label class="label" for="name">Name:</label>
                 <input type="text" class="form-control" th:field="${labGlasswareModel.name}" id="name"/>
@@ -189,7 +192,7 @@
         input.setAttribute("placeholder", "Size Designation");
         input.setAttribute("required", "required");
         // Add pattern validation
-        input.addEventListener("input", function() {
+        input.addEventListener("input", function () {
             const pattern = /^(?:\d{1,2}\/\d{1,2} (cone|socket)|\w\d{1,2} (ball|cup)|\d{1,3})$/;
             const inputValue = input.value;
             if (!pattern.test(inputValue)) {

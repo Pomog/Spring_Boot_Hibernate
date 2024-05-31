@@ -15,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @RequiredArgsConstructor
 public class LabGlasswareDTO {
+    private Long id;
     @NonNull
     private String name;
     private String material;
@@ -31,9 +32,10 @@ public class LabGlasswareDTO {
     @NonNull
     private Integer capacityML;
     
-    private List<GlassJointDTO> glassJointsDTO=new ArrayList<>();
+    private List<GlassJointDTO> glassJointsDTO = new ArrayList<>();
     
     public LabGlasswareDTO(LabGlassware labGlassware) {
+        this.id = labGlassware.getId();
         this.name = labGlassware.getName();
         this.material = labGlassware.getMaterial();
         this.broken = labGlassware.getBroken() != null ? labGlassware.getBroken() : false;
@@ -59,7 +61,7 @@ public class LabGlasswareDTO {
         this.glassJointsDTO.add(glassJointDTO);
     }
     
-    public void setGlassJoints (List<GlassJointDTO> glassJointsDTO){
+    public void setGlassJoints(List<GlassJointDTO> glassJointsDTO) {
         glassJointsDTO.forEach(this::addGlassJoint);
     }
 }

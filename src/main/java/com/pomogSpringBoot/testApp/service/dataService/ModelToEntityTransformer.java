@@ -12,6 +12,7 @@ public class ModelToEntityTransformer implements ObjectTranformer<LabGlasswareMo
     @Override
     public LabGlassware transform(LabGlasswareModel source) {
         LabGlassware labGlassware = new LabGlassware();
+        labGlassware.setId(source.getId());
         labGlassware.setName(source.getName());
         labGlassware.setBroken(source.getBroken());
         labGlassware.setRepaired(source.getRepaired());

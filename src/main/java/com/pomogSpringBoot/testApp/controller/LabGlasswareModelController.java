@@ -57,8 +57,13 @@ public class LabGlasswareModelController {
     
     
     @GetMapping("/lab-glassware-form")
-    public String showForm(Model theModel) {
-        theModel.addAttribute("labGlasswareModel", new LabGlasswareModel());
+    public String showForm(Model theModel, @RequestParam(value ="id", required = false) long id) {
+        if (id != 0) {
+            LabGlassware labGlassware = labGlasswareService.findLabGlasswareByID(id);
+            theModel.addAttribute("labGlasswareModel", new LabGlasswareModel(labGlassware));
+        } else {
+            theModel.addAttribute("labGlasswareModel", new LabGlasswareModel());
+        }
         theModel.addAttribute("jointTypesList", JointType.values());
         
         return "lab-glassware-form";

@@ -27,6 +27,7 @@ public class LabGlasswareServiceImpl implements LabGlasswareService{
     @Transactional
     public LabGlasswareDTO save(LabGlassware labGlasswareReq){
         var labGlassware = createLabGlasswareFormReq(labGlasswareReq);
+        System.out.println(labGlassware.getId());
         LabGlassware savedLabGlassware = labGlasswareRepository.save(labGlassware);
 
         return new LabGlasswareDTO(savedLabGlassware);
