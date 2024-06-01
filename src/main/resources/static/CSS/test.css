@@ -5,24 +5,30 @@
     padding-left: 150px;
 }
 
-.label{
+.label {
     font-style: italic;
     color: blueviolet;
     font-size: medium;
     padding-left: 15px;
 }
 
-.form-error{
+.form-error {
     color: red;
     font-size: large;
 }
 
- th {
-     cursor: pointer;
- }
+.btn-margin {
+    margin: 10px;
+}
+
+th {
+    cursor: pointer;
+}
+
 th.sort-asc::after {
     content: " ▲";
 }
+
 th.sort-desc::after {
     content: " ▼";
 }

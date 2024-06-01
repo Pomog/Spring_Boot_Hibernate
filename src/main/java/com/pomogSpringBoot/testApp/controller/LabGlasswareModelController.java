@@ -69,16 +69,17 @@ public class LabGlasswareModelController {
         return "lab-glassware-form";
     }
     
-    @PostMapping("/processLabGlasswareForm")
+    @PostMapping("/processLabGlassware")
     public String processLabGlasswareSaveForm(
             @Valid
             @ModelAttribute("labGlasswareModel") LabGlasswareModel labGlasswareModel,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes,
             @RequestParam(value = "jointTypes", required = false) List<String> jointTypes,
-            @RequestParam(value = "sizeDesignations", required = false) List<String> sizeDesignations) {
+            @RequestParam(value = "sizeDesignations", required = false) List<String> sizeDesignations,
+            @RequestParam("action") String action){
         
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors() && !action.equals("delete")){
             return "lab-glassware-form";
         }
         
@@ -89,13 +90,28 @@ public class LabGlasswareModelController {
             sizeDesignations = new ArrayList<>();
         }
         
-        extractModel(labGlasswareModel, jointTypes, sizeDesignations);
-        checkForErrors(labGlasswareModel);
+        switch (action) {
+            case "update":
+                extractModel(labGlasswareModel, jointTypes, sizeDesignations);
+                checkForErrors(labGlasswareModel);
+                
+                LabGlassware labGlassware = objectTranformer.transform(labGlasswareModel);
+                labGlasswareService.save(labGlassware);
+                
+                redirectAttributes.addFlashAttribute("successMessage", "Lab Glassware updated successfully.");
+                break;
+            
+            case "delete":
+                labGlasswareService.deleteByID(labGlasswareModel.getId());
+                
+                redirectAttributes.addFlashAttribute("successMessage", "Lab Glassware deleted successfully.");
+                break;
+            
+            default:
+                redirectAttributes.addFlashAttribute("errorMessage", "Invalid action.");
+                break;
+        }
         
-        LabGlassware labGlassware = objectTranformer.transform(labGlasswareModel);
-        labGlasswareService.save(labGlassware);
-        
-        redirectAttributes.addFlashAttribute("successMessage", "Lab Glassware saved successfully.");
         return "redirect:/list";
     }
     

@@ -13,7 +13,7 @@
     <h3 class="funny">LabGlassware Registration Form</h3>
     <div class="col-lg-6">
 
-        <form th:action="@{/processLabGlasswareForm}" th:object="${labGlasswareModel}" method="POST">
+        <form th:action="@{/processLabGlassware}" th:object="${labGlasswareModel}" method="POST">
 
             <!-- Hidden ID field -->
             <input type="hidden" th:field="${labGlasswareModel.id}" />
@@ -141,7 +141,11 @@
 
             <div class="row-cols-lg-auto">
                 <div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-danger btn-sm btn-margin" name="action" value="delete">Delete</button>
+                </div>
+
+                <div>
+                <button type="submit" class="btn btn-info btn-sm btn-margin" name="action" value="update">Save</button>
                 </div>
             </div>
 
