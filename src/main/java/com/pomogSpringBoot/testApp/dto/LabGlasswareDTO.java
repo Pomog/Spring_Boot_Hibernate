@@ -1,6 +1,6 @@
 package com.pomogSpringBoot.testApp.dto;
 
-import com.pomogSpringBoot.testApp.entity.LabGlassware;
+import com.pomogSpringBoot.testApp.entity.glassware.LabGlassware;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;

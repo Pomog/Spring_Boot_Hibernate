@@ -1,7 +1,7 @@
 package com.pomogSpringBoot.testApp.model;
 
-import com.pomogSpringBoot.testApp.entity.GlassJoint;
-import com.pomogSpringBoot.testApp.entity.JointType;
+import com.pomogSpringBoot.testApp.entity.glassware.GlassJoint;
+import com.pomogSpringBoot.testApp.entity.glassware.JointType;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;

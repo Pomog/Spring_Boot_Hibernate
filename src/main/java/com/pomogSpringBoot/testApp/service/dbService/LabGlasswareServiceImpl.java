@@ -3,7 +3,7 @@ package com.pomogSpringBoot.testApp.service.dbService;
 import com.pomogSpringBoot.testApp.dao.LabGlasswareDAO;
 import com.pomogSpringBoot.testApp.dao.LabGlasswareRepository;
 import com.pomogSpringBoot.testApp.dto.LabGlasswareDTO;
-import com.pomogSpringBoot.testApp.entity.LabGlassware;
+import com.pomogSpringBoot.testApp.entity.glassware.LabGlassware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

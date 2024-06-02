@@ -1,7 +1,7 @@
 package com.pomogSpringBoot.testApp.dto;
 
-import com.pomogSpringBoot.testApp.entity.GlassJoint;
-import com.pomogSpringBoot.testApp.entity.JointType;
+import com.pomogSpringBoot.testApp.entity.glassware.GlassJoint;
+import com.pomogSpringBoot.testApp.entity.glassware.JointType;
 import lombok.*;
 
 @Data

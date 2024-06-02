@@ -1,12 +1,6 @@
 package legacy;
 
 import com.pomogSpringBoot.testApp.dao.LabGlasswareDAO;
-import com.pomogSpringBoot.testApp.entity.GlassJoint;
-import com.pomogSpringBoot.testApp.entity.JointType;
-import com.pomogSpringBoot.testApp.entity.LabGlassware;
-
-import java.sql.Date;
-import java.time.LocalDate;
 
 public class OldCommandRunner {
 

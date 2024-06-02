@@ -1,6 +1,6 @@
 package com.pomogSpringBoot.testApp.dao;
 
-import com.pomogSpringBoot.testApp.entity.LabGlassware;
+import com.pomogSpringBoot.testApp.entity.glassware.LabGlassware;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;

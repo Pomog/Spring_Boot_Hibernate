@@ -1,7 +1,7 @@
 package com.pomogSpringBoot.testApp.service.dataService;
 
-import com.pomogSpringBoot.testApp.entity.GlassJoint;
-import com.pomogSpringBoot.testApp.entity.LabGlassware;
+import com.pomogSpringBoot.testApp.entity.glassware.GlassJoint;
+import com.pomogSpringBoot.testApp.entity.glassware.LabGlassware;
 import com.pomogSpringBoot.testApp.model.LabGlasswareModel;
 import org.springframework.stereotype.Component;
 

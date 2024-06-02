@@ -1,8 +1,7 @@
 package com.pomogSpringBoot.testApp.controller;
 
-import com.pomogSpringBoot.testApp.dto.LabGlasswareDTO;
-import com.pomogSpringBoot.testApp.entity.JointType;
-import com.pomogSpringBoot.testApp.entity.LabGlassware;
+import com.pomogSpringBoot.testApp.entity.glassware.JointType;
+import com.pomogSpringBoot.testApp.entity.glassware.LabGlassware;
 import com.pomogSpringBoot.testApp.errorRespose.LabGlasswareException;
 import com.pomogSpringBoot.testApp.errorRespose.error.CoreError;
 import com.pomogSpringBoot.testApp.service.dataService.ObjectTranformer;

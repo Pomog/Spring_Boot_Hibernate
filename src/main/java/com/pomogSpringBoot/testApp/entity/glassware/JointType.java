@@ -1,4 +1,4 @@
-package com.pomogSpringBoot.testApp.entity;
+package com.pomogSpringBoot.testApp.entity.glassware;
 
 public enum JointType {
     SPHERICAL_CUP,
