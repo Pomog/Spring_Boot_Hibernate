@@ -24,7 +24,7 @@ public class SecurityConfiguration {
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
+    
     @Bean
     public DaoAuthenticationProvider authenticationProvider(UserService userService) {
         DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
@@ -32,9 +32,9 @@ public class SecurityConfiguration {
         auth.setPasswordEncoder(passwordEncoder()); //set the password encoder - bcrypt
         return auth;
     }
-
+    
     @Bean
-    public UserDetailsManager userDetailsManager (DataSource dataSource){
+    public UserDetailsManager userDetailsManager(DataSource dataSource) {
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
         jdbcUserDetailsManager.setUsersByUsernameQuery(
                 "select username, password, enabled from users where username=?");
@@ -46,16 +46,22 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(configurer ->
-                configurer
-                        .requestMatchers("/CSS/**", "/js/**", "/images/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole(UserRole.USER.name(), UserRole.MANAGER.name(), UserRole.ADMIN.name())
-                        .requestMatchers(HttpMethod.POST, "/api/**").hasAnyRole(UserRole.MANAGER.name(), UserRole.ADMIN.name())
-                        .requestMatchers(HttpMethod.PUT, "/api/**").hasAnyRole(UserRole.MANAGER.name(), UserRole.ADMIN.name())
-                        .requestMatchers(HttpMethod.DELETE, "/api/**").hasRole(UserRole.ADMIN.name())
-                        .requestMatchers(HttpMethod.GET, "/**").hasAnyRole(UserRole.USER.name(), UserRole.MANAGER.name(), UserRole.ADMIN.name())
-                        .requestMatchers(HttpMethod.POST, "/**").hasAnyRole(UserRole.ADMIN.name(), UserRole.MANAGER.name())
-                        .requestMatchers(HttpMethod.DELETE, "/**").hasAnyRole(UserRole.ADMIN.name())
-        );
+                        configurer
+                                .requestMatchers("/CSS/**", "/js/**", "/img/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole(UserRole.USER.name(), UserRole.MANAGER.name(), UserRole.ADMIN.name())
+                                .requestMatchers(HttpMethod.POST, "/api/**").hasAnyRole(UserRole.MANAGER.name(), UserRole.ADMIN.name())
+                                .requestMatchers(HttpMethod.PUT, "/api/**").hasAnyRole(UserRole.MANAGER.name(), UserRole.ADMIN.name())
+                                .requestMatchers(HttpMethod.DELETE, "/api/**").hasRole(UserRole.ADMIN.name())
+                                .requestMatchers(HttpMethod.GET, "/**").hasAnyRole(UserRole.USER.name(), UserRole.MANAGER.name(), UserRole.ADMIN.name())
+                                .requestMatchers(HttpMethod.POST, "/**").hasAnyRole(UserRole.ADMIN.name(), UserRole.MANAGER.name())
+                                .requestMatchers(HttpMethod.DELETE, "/**").hasAnyRole(UserRole.ADMIN.name())
+                )
+                .formLogin(form ->
+                        form
+                                .loginPage("/login-page")
+                                .loginProcessingUrl("/authenticateTheUser")
+                                .permitAll()
+                );
         http.httpBasic(Customizer.withDefaults());
         http.csrf(AbstractHttpConfigurer::disable);
         return http.build();
