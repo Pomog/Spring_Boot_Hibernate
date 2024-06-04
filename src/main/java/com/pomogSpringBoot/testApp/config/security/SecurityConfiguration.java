@@ -11,11 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-
-import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
@@ -33,15 +29,15 @@ public class SecurityConfiguration {
         return auth;
     }
     
-    @Bean
-    public UserDetailsManager userDetailsManager(DataSource dataSource) {
-        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-        jdbcUserDetailsManager.setUsersByUsernameQuery(
-                "select username, password, enabled from users where username=?");
-        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
-                "select username, authority from authorities where username=?");
-        return jdbcUserDetailsManager;
-    }
+//    @Bean
+//    public UserDetailsManager userDetailsManager(DataSource dataSource) {
+//        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+//        jdbcUserDetailsManager.setUsersByUsernameQuery(
+//                "select username, password, enabled from users where username=?");
+//        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
+//                "select username, authority from authorities where username=?");
+//        return jdbcUserDetailsManager;
+//    }
     
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -59,7 +55,8 @@ public class SecurityConfiguration {
                 .formLogin(form ->
                         form
                                 .loginPage("/login-page")
-                                .loginProcessingUrl("/authenticateTheUser")
+                                .loginProcessingUrl("/perform_login")
+                                .defaultSuccessUrl("/",true)
                                 .permitAll()
                 );
         http.httpBasic(Customizer.withDefaults());

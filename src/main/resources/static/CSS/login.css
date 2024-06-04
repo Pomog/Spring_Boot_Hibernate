@@ -27,6 +27,12 @@ h2 {
     color: #cccccc;
 }
 
+.error-msg {
+    text-align: center;
+    font-size: 18px;
+    color: red;
+}
+
 
 
 /* STRUCTURE */
