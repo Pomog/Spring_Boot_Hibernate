@@ -10,6 +10,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -28,16 +29,6 @@ public class SecurityConfiguration {
         auth.setPasswordEncoder(passwordEncoder()); //set the password encoder - bcrypt
         return auth;
     }
-    
-//    @Bean
-//    public UserDetailsManager userDetailsManager(DataSource dataSource) {
-//        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-//        jdbcUserDetailsManager.setUsersByUsernameQuery(
-//                "select username, password, enabled from users where username=?");
-//        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
-//                "select username, authority from authorities where username=?");
-//        return jdbcUserDetailsManager;
-//    }
     
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -58,6 +49,8 @@ public class SecurityConfiguration {
                                 .loginProcessingUrl("/perform_login")
                                 .defaultSuccessUrl("/",true)
                                 .permitAll()
+                )
+                .logout(LogoutConfigurer::permitAll
                 );
         http.httpBasic(Customizer.withDefaults());
         http.csrf(AbstractHttpConfigurer::disable);

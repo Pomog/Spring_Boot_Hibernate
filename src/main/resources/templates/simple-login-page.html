@@ -18,9 +18,13 @@
         </div>
 
         <!-- Login Form -->
-        <form action="#" th:action="@{/perform_login}" method="POST">
+        <form class="form-horizontal" action="#" th:action="@{/perform_login}" method="POST">
             <div th:if="${param.error}">
-                <i class="error-msg">Invalid username/password</i>
+                <i class="error-msg alert-danger col-xs-offset-1 col-xs-10">Invalid username/password</i>
+            </div>
+
+            <div th:if="${param.logout}">
+                <i class="error-msg">You have been logged out</i>
             </div>
 
             <input type="text" id="login" class="fadeIn second" name="username" placeholder="login">
