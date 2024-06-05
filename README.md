@@ -24,6 +24,8 @@ This command will compile the source code, run tests, and package the applicatio
 ## Running the Application
 To launch the application, use the following command:
 ```
+# Labglassware Application
+Java Web application, with SpringBoot, for monitoring laboratory glassware. MySQL used as database
 java -jar F:\testApp\build\libs\testApp-0.0.1-SNAPSHOT.jar
 ```
 Replace `F:\testApp\build\libs\testApp-0.0.1-SNAPSHOT.jar` with the path to your generated JAR file.
