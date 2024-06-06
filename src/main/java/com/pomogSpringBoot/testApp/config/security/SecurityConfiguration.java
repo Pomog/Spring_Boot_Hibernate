@@ -50,10 +50,10 @@ public class SecurityConfiguration {
                                 .defaultSuccessUrl("/",true)
                                 .permitAll()
                 )
-                .logout(LogoutConfigurer::permitAll
-                );
-        http.httpBasic(Customizer.withDefaults());
-        http.csrf(AbstractHttpConfigurer::disable);
+                .logout(LogoutConfigurer::permitAll)
+                ;
+//        http.httpBasic(Customizer.withDefaults());
+//        http.csrf(AbstractHttpConfigurer::disable);
         return http.build();
     }
 }

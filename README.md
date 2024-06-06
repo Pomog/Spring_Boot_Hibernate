@@ -36,3 +36,4 @@ gradle bootRun
 ```
 
 Feel free to explore and experiment with the functionalities of this application!
+

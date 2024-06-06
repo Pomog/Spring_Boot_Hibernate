@@ -33,7 +33,9 @@ h2 {
     color: red;
 }
 
-
+.hide{
+    display: none;
+}
 
 /* STRUCTURE */
 
