@@ -34,7 +34,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(configurer ->
                         configurer
-                                .requestMatchers("/CSS/**", "/js/**", "/img/**").permitAll()
+                                .requestMatchers("/CSS/**", "/js/**", "/img/**", "/access-denied").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole(UserRole.USER.name(), UserRole.MANAGER.name(), UserRole.ADMIN.name())
                                 .requestMatchers(HttpMethod.POST, "/api/**").hasAnyRole(UserRole.MANAGER.name(), UserRole.ADMIN.name())
                                 .requestMatchers(HttpMethod.PUT, "/api/**").hasAnyRole(UserRole.MANAGER.name(), UserRole.ADMIN.name())
@@ -44,6 +44,7 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.GET, "/list").hasAnyRole(UserRole.USER.name(), UserRole.MANAGER.name(), UserRole.ADMIN.name())
                                 .requestMatchers(HttpMethod.POST, "/**").hasAnyRole(UserRole.ADMIN.name(), UserRole.MANAGER.name())
                                 .requestMatchers(HttpMethod.DELETE, "/**").hasAnyRole(UserRole.ADMIN.name())
+                                .requestMatchers(HttpMethod.PUT, "/**").hasAnyRole(UserRole.ADMIN.name())
                                 .requestMatchers(HttpMethod.GET,"/userinfo").hasRole(UserRole.ADMIN.name())
                 )
                 .formLogin(form ->
@@ -54,6 +55,10 @@ public class SecurityConfiguration {
                                 .permitAll()
                 )
                 .logout(LogoutConfigurer::permitAll)
+                .exceptionHandling(configurer ->
+                        configurer
+                                .accessDeniedPage("/access-denied"))
+              
                 ;
 //        http.httpBasic(Customizer.withDefaults());
 //        http.csrf(AbstractHttpConfigurer::disable);
