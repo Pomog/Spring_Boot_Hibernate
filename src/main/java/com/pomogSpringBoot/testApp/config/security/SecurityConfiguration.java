@@ -39,9 +39,12 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.POST, "/api/**").hasAnyRole(UserRole.MANAGER.name(), UserRole.ADMIN.name())
                                 .requestMatchers(HttpMethod.PUT, "/api/**").hasAnyRole(UserRole.MANAGER.name(), UserRole.ADMIN.name())
                                 .requestMatchers(HttpMethod.DELETE, "/api/**").hasRole(UserRole.ADMIN.name())
-                                .requestMatchers(HttpMethod.GET, "/**").hasAnyRole(UserRole.USER.name(), UserRole.MANAGER.name(), UserRole.ADMIN.name())
+                                .requestMatchers(HttpMethod.GET, "/").hasAnyRole(UserRole.USER.name(), UserRole.MANAGER.name(), UserRole.ADMIN.name())
+                                .requestMatchers(HttpMethod.GET, "/homepage").hasAnyRole(UserRole.USER.name(), UserRole.MANAGER.name(), UserRole.ADMIN.name())
+                                .requestMatchers(HttpMethod.GET, "/list").hasAnyRole(UserRole.USER.name(), UserRole.MANAGER.name(), UserRole.ADMIN.name())
                                 .requestMatchers(HttpMethod.POST, "/**").hasAnyRole(UserRole.ADMIN.name(), UserRole.MANAGER.name())
                                 .requestMatchers(HttpMethod.DELETE, "/**").hasAnyRole(UserRole.ADMIN.name())
+                                .requestMatchers(HttpMethod.GET,"/userinfo").hasRole(UserRole.ADMIN.name())
                 )
                 .formLogin(form ->
                         form

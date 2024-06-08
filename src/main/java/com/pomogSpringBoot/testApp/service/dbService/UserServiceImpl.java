@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -30,6 +31,11 @@ public class UserServiceImpl implements UserService{
     public User findByUserName(String userName) {
         User foundUser = userDao.findByUserName(userName);
         return foundUser;
+    }
+    
+    @Override
+    public List<User> findAllUsers() {
+        return userDao.findAllUsers();
     }
     
     @Override

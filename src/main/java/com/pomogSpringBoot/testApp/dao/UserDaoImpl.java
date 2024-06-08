@@ -1,9 +1,12 @@
 package com.pomogSpringBoot.testApp.dao;
 
+import com.pomogSpringBoot.testApp.entity.glassware.LabGlassware;
 import com.pomogSpringBoot.testApp.entity.user.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -22,5 +25,12 @@ public class UserDaoImpl implements UserDao {
             theUser = null;
         }
         return theUser;
+    }
+    
+    @Override
+    public List<User> findAllUsers() {
+        TypedQuery<User> findAllQuery = entityManager.createQuery("FROM User ", User.class);
+        
+        return findAllQuery.getResultList();
     }
 }
