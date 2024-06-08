@@ -37,3 +37,5 @@ gradle bootRun
 
 Feel free to explore and experiment with the functionalities of this application!
 
+### Reading
+2024.06.07 osi
