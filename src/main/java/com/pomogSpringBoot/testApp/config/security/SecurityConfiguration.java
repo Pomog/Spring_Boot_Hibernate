@@ -45,7 +45,7 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.POST, "/**").hasAnyRole(UserRole.ADMIN.name(), UserRole.MANAGER.name())
                                 .requestMatchers(HttpMethod.DELETE, "/**").hasAnyRole(UserRole.ADMIN.name())
                                 .requestMatchers(HttpMethod.PUT, "/**").hasAnyRole(UserRole.ADMIN.name())
-                                .requestMatchers(HttpMethod.GET,"/userinfo").hasRole(UserRole.ADMIN.name())
+                                .requestMatchers(HttpMethod.GET,"/userinfo").hasAnyRole(UserRole.ADMIN.name(), UserRole.MANAGER.name())
                 )
                 .formLogin(form ->
                         form

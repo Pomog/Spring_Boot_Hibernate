@@ -27,11 +27,11 @@
     <button type="submit" class="btn btn-info">Glassware</button>
 </form>
 <hr>
-<!-- Link to show all users -->
-<div class="show-all-users">
-    <a th:href="@{/userinfo}">Users Info</a>
-</div>
 
+<!-- Link to show all users -->
+<div sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')" class="show-all-users">
+    <p><a th:href="@{/userinfo}">Users Info</a></p>
+</div>
 
 </body>
 </html>

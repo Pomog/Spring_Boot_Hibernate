@@ -100,7 +100,12 @@ public class LabGlasswareModelController {
                 redirectAttributes.addFlashAttribute("successMessage", "Lab Glassware updated successfully.");
                 break;
             
+ 
             case "delete":
+/*
+TODO: This is CODE error: processLabGlasswareSaveForm works with POST but runs DELETE in the DB
+In this way authorities restriction -> only ADMIN can DELETE is bypassed
+ */
                 labGlasswareService.deleteByID(labGlasswareModel.getId());
                 
                 redirectAttributes.addFlashAttribute("successMessage", "Lab Glassware deleted successfully.");
