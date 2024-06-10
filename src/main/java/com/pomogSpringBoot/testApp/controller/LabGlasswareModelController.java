@@ -99,7 +99,6 @@ public class LabGlasswareModelController {
                 
                 redirectAttributes.addFlashAttribute("successMessage", "Lab Glassware updated successfully.");
                 break;
-            
  
             case "delete":
 /*

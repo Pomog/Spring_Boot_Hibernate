@@ -12,16 +12,16 @@ import java.util.List;
 @Data
 public class User {
     @Id
-    @Column(length = 50)
+    @Column(length = 50, unique = true)
     private String username;
     
-    @Column(length = 500, nullable = false)
+    @Column(length = 68, nullable = false)
     private String password;
     
     @Column(nullable = false)
     private boolean enabled;
     
-    @Column(length = 50, nullable = false)
+    @Column(length = 50, nullable = false, unique = true)
     private String email;
     
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

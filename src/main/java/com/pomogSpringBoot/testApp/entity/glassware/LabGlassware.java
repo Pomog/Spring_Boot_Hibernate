@@ -26,11 +26,11 @@ public class LabGlassware {
     @NonNull
     private String name;
     
-    @Column(name = "isBroken")
+    @Column(name = "is_broken")
     @NonNull
     private Boolean broken;
     
-    @Column(name = "isRepaired")
+    @Column(name = "is_repaired")
     @NonNull
     private Boolean repaired;
     
