@@ -5,6 +5,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Repository
 public class AuthorityDAOImpl implements AuthorityDAO{
     private final EntityManager entityManager;
@@ -14,14 +17,14 @@ public class AuthorityDAOImpl implements AuthorityDAO{
     }
     
     @Override
-    public Authority findAuthorityByName(String theAuthorityName) {
+    public List<Authority> findAuthorityByName(String theAuthorityName) {
         TypedQuery<Authority> theQuery = entityManager.createQuery("from Authority where authority=:roleName", Authority.class);
         theQuery.setParameter("roleName", theAuthorityName);
         
-        Authority theAuthority = null;
+        List<Authority> theAuthority = new ArrayList<>();
         
         try {
-            theAuthority = theQuery.getSingleResult();
+            theAuthority = theQuery.getResultList();
         } catch (Exception e) {
             theAuthority = null;
         }
