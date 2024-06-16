@@ -19,6 +19,7 @@ public class LabGlasswareDTO {
     @NonNull
     private String name;
     private String material;
+    private String image;
     private Boolean broken = false;
     private Boolean repaired = false;
     private String manufacturer;
@@ -38,6 +39,7 @@ public class LabGlasswareDTO {
         this.id = labGlassware.getId();
         this.name = labGlassware.getName();
         this.material = labGlassware.getMaterial();
+        this.image = labGlassware.getImage();
         this.broken = labGlassware.getBroken() != null ? labGlassware.getBroken() : false;
         this.repaired = labGlassware.getRepaired() != null ? labGlassware.getRepaired() : false;
         this.manufacturer = labGlassware.getManufacturer();

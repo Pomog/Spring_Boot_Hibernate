@@ -4,10 +4,14 @@ import com.pomogSpringBoot.testApp.dao.LabGlasswareDAO;
 import com.pomogSpringBoot.testApp.dao.LabGlasswareRepository;
 import com.pomogSpringBoot.testApp.dto.LabGlasswareDTO;
 import com.pomogSpringBoot.testApp.entity.glassware.LabGlassware;
+import com.pomogSpringBoot.testApp.errorRespose.LabGlasswareException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +34,21 @@ public class LabGlasswareServiceImpl implements LabGlasswareService{
         System.out.println(labGlassware.getId());
         LabGlassware savedLabGlassware = labGlasswareRepository.save(labGlassware);
 
+        return new LabGlasswareDTO(savedLabGlassware);
+    }
+    
+    @Override
+    @Transactional
+    public LabGlasswareDTO saveWithImage(LabGlassware labGlasswareReq, MultipartFile file) {
+        var labGlassware = createLabGlasswareFormReq(labGlasswareReq);
+        try {
+            labGlasswareReq.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+        } catch (IOException e){
+            throw new LabGlasswareException(e.getMessage());
+            
+        }
+        LabGlassware savedLabGlassware = labGlasswareRepository.save(labGlassware);
+        
         return new LabGlasswareDTO(savedLabGlassware);
     }
     

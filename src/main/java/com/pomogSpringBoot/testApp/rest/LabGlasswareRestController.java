@@ -6,9 +6,15 @@ import com.pomogSpringBoot.testApp.errorRespose.LabGlasswareException;
 import com.pomogSpringBoot.testApp.service.dbService.LabGlasswareService;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -37,6 +43,18 @@ public class LabGlasswareRestController {
         }
         return labGlassware;
     }
+    @GetMapping(value = "/{id}/image")
+    public ResponseEntity<byte[]> getLabglasswareByIDWithO(@PathVariable Long id) {
+        LabGlassware labGlassware = labGlasswareService.findLabGlasswareByID(id);
+        if (labGlassware != null) {
+            byte[] imageBytes = java.util.Base64.getDecoder().decode(labGlassware.getImage());
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_JPEG);
+            return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new byte[0], HttpStatus.NOT_FOUND);
+        }
+    }
     
     @GetMapping("/labglasswareName/{name}")
     public List<LabGlasswareDTO> getLabglasswareByName(@PathVariable String name) {
@@ -51,6 +69,12 @@ public class LabGlasswareRestController {
     public LabGlasswareDTO addLabGlassware(@RequestBody @NonNull LabGlassware labGlassware) {
         return labGlasswareService.saveUsingDAO(labGlassware);
     }
+    
+    @PostMapping("/labglassware-img")
+    public LabGlasswareDTO addLabGlasswareIMG(@RequestBody @NonNull LabGlassware labGlassware, @RequestParam("imageFile") MultipartFile imageFile) {
+        return labGlasswareService.saveWithImage(labGlassware, imageFile);
+    }
+
     
     @PutMapping("/labglassware")
     public LabGlasswareDTO updateLabGlassware(@RequestBody @NonNull LabGlassware labGlassware) {

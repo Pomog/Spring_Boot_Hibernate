@@ -21,6 +21,7 @@ public class LabGlasswareModel{
     @NotNull(message = "Lab Glassware name is required")
     @Size(min = 1, max = 50, message = "inappropriate Lab Glassware name")
     private String name;
+    private String image;
     private String material;
     @NotNull(message = "Lab Glassware conditions is required")
     private Boolean broken;
@@ -49,6 +50,7 @@ public class LabGlasswareModel{
     public LabGlasswareModel(LabGlassware labGlassware) {
         this.id = labGlassware.getId();
         this.name = labGlassware.getName();
+        this.image = labGlassware.getImage();
         this.material = labGlassware.getMaterial();
         this.broken = labGlassware.getBroken();
         this.repaired = labGlassware.getRepaired();

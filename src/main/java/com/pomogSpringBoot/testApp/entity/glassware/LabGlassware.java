@@ -1,10 +1,8 @@
 package com.pomogSpringBoot.testApp.entity.glassware;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.Type;
 
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -26,6 +24,10 @@ public class LabGlassware {
     @NonNull
     private String name;
     
+    @Lob
+    @Column(columnDefinition = "MEDIUMBLOB")
+    private String image;
+  
     @Column(name = "is_broken")
     @NonNull
     private Boolean broken;

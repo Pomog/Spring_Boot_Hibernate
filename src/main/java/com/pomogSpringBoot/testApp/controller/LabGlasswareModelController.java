@@ -21,6 +21,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,11 @@ public class LabGlasswareModelController {
     private static final Logger logger = LoggerFactory.getLogger(LabGlasswareModelController.class);
     
     @Autowired
-    public LabGlasswareModelController(ModelValidator validator, ObjectTranformer<LabGlasswareModel, LabGlassware> objectTranformer, LabGlasswareService labGlasswareService) {
+    public LabGlasswareModelController(
+            ModelValidator validator,
+            ObjectTranformer<LabGlasswareModel,
+            LabGlassware> objectTranformer,
+            LabGlasswareService labGlasswareService) {
         this.validator = validator;
         this.objectTranformer = objectTranformer;
         this.labGlasswareService = labGlasswareService;
@@ -56,7 +61,10 @@ public class LabGlasswareModelController {
     
     
     @GetMapping("/lab-glassware-form")
-    public String showForm(Model theModel, @RequestParam(value ="id", required = false) long id) {
+    public String showForm(
+            Model theModel,
+            @RequestParam(value ="id", required = false) long id)
+    {
         if (id != 0) {
             LabGlassware labGlassware = labGlasswareService.findLabGlasswareByID(id);
             theModel.addAttribute("labGlasswareModel", new LabGlasswareModel(labGlassware));
@@ -76,7 +84,8 @@ public class LabGlasswareModelController {
             RedirectAttributes redirectAttributes,
             @RequestParam(value = "jointTypes", required = false) List<String> jointTypes,
             @RequestParam(value = "sizeDesignations", required = false) List<String> sizeDesignations,
-            @RequestParam("action") String action){
+            @RequestParam("action") String action,
+            @RequestParam("imageFile") MultipartFile imageFile) {
         
         if (bindingResult.hasErrors() && !action.equals("delete")){
             return "lab-glassware-form";
@@ -95,7 +104,8 @@ public class LabGlasswareModelController {
                 checkForErrors(labGlasswareModel);
                 
                 LabGlassware labGlassware = objectTranformer.transform(labGlasswareModel);
-                labGlasswareService.save(labGlassware);
+                System.out.println(imageFile.getContentType());
+                labGlasswareService.saveWithImage(labGlassware, imageFile);
                 
                 redirectAttributes.addFlashAttribute("successMessage", "Lab Glassware updated successfully.");
                 break;
