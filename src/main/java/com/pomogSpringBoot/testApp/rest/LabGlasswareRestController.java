@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -44,7 +43,7 @@ public class LabGlasswareRestController {
         return labGlassware;
     }
     @GetMapping(value = "/{id}/image")
-    public ResponseEntity<byte[]> getLabglasswareByIDWithO(@PathVariable Long id) {
+    public ResponseEntity<byte[]> getImageLabGlasswareByID(@PathVariable Long id) {
         LabGlassware labGlassware = labGlasswareService.findLabGlasswareByID(id);
         if (labGlassware != null) {
             byte[] imageBytes = java.util.Base64.getDecoder().decode(labGlassware.getImage());

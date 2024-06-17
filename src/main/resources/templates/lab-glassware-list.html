@@ -12,6 +12,15 @@
 
 <div class="container">
     <h3>Lab Glassware</h3>
+
+    <!-- Flash Message Section -->
+    <div th:if="${successMessage}" class="alert alert-success" role="alert">
+        <span th:text="${successMessage}"></span>
+    </div>
+    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+        <span th:text="${errorMessage}"></span>
+    </div>
+
     <hr>
     <a th:href="@{lab-glassware-form}"
     class="btn btn-primary btn-sm mb-3">
@@ -34,6 +43,7 @@
             <th onclick="sortTable(11)">Provider</th>
             <th onclick="sortTable(12)">Capacity (mL)</th>
             <th onclick="sortTable(13)">Glass Joints</th>
+            <th>Image</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -64,6 +74,9 @@
                         th:text="'Type: ' + ${joint.type} + ', Size: ' + ${joint.sizeDesignation}">
                     </li>
                 </ul>
+            </td>
+            <td>
+                <img th:src="'data:image/jpeg;base64,' + ${tempGlassware.image}" alt="Glassware Image" class="img-thumbnail"/>
             </td>
             <td>
                 <a th:href="@{/lab-glassware-form(id=${tempGlassware.id}, action='update')}"

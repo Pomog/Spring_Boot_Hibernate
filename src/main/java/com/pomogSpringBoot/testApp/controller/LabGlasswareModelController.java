@@ -85,7 +85,7 @@ public class LabGlasswareModelController {
             @RequestParam(value = "jointTypes", required = false) List<String> jointTypes,
             @RequestParam(value = "sizeDesignations", required = false) List<String> sizeDesignations,
             @RequestParam("action") String action,
-            @RequestParam("imageFile") MultipartFile imageFile) {
+            @RequestParam(value = "imageFile", required = false) MultipartFile imageFile) {
         
         if (bindingResult.hasErrors() && !action.equals("delete")){
             return "lab-glassware-form";
