@@ -79,11 +79,15 @@
                 <img th:src="'data:image/jpeg;base64,' + ${tempGlassware.image}" alt="Glassware Image" class="img-thumbnail"/>
             </td>
             <td>
+                <div class="button-container">
+                <div class="update-button">
                 <a th:href="@{/lab-glassware-form(id=${tempGlassware.id}, action='update')}"
                     class="btn btn-info btn-sm btn-margin">
                     Update
                 </a>
+                </div>
 
+                <div class="delete-button">
                 <form th:action="@{/processLabGlassware}" method="post" id="deleteForm" style="display:inline;">
                     <input type="hidden" name="id" th:value="${tempGlassware.id}" />
                     <input type="hidden" name="action" value="delete" />
@@ -91,6 +95,8 @@
                         Delete
                     </button>
                 </form>
+                </div>
+                </div>
             </td>
         </tr>
         </tbody>

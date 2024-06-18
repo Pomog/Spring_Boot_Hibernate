@@ -104,7 +104,6 @@ public class LabGlasswareModelController {
                 checkForErrors(labGlasswareModel);
                 
                 LabGlassware labGlassware = objectTranformer.transform(labGlasswareModel);
-                System.out.println(imageFile.getContentType());
                 labGlasswareService.saveWithImage(labGlassware, imageFile);
                 
                 redirectAttributes.addFlashAttribute("successMessage", "Lab Glassware updated successfully.");

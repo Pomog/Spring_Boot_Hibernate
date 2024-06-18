@@ -32,3 +32,16 @@ th.sort-asc::after {
 th.sort-desc::after {
     content: " ▼";
 }
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.update-button,
+.delete-button {
+    margin: 5px 0;
+}
