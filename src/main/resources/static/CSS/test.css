@@ -41,7 +41,9 @@ th.sort-desc::after {
     height: 100%;
 }
 
+.my-button,
 .update-button,
-.delete-button {
+.delete-button,
+.add-button {
     margin: 5px 0;
 }
