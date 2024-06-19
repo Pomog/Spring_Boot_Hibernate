@@ -15,4 +15,5 @@ public interface LabGlasswareService {
     List<LabGlasswareDTO> findLabGlasswareByName(String name);
     void deleteByID (Long id);
     int deleteAllGlassJoint();
+    List<LabGlasswareDTO> findByVolume (int maxVol, int minVol);
 }

@@ -104,4 +104,11 @@ public class LabGlasswareServiceImpl implements LabGlasswareService{
     public int deleteAllGlassJoint() {
         return this.labGlasswareDAO.deleteAllGlassJoint();
     }
+    
+    @Override
+    public List<LabGlasswareDTO> findByVolume(int maxVol, int minVol) {
+        return this.labGlasswareDAO.findByVolume(maxVol, minVol).stream()
+                .map(LabGlasswareDTO::new)
+                .collect(Collectors.toList());
+    }
 }

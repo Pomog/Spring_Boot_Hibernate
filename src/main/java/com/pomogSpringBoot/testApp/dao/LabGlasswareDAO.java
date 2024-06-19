@@ -11,4 +11,5 @@ public interface LabGlasswareDAO {
     List<LabGlassware> findLabGlasswareByName(String name);
     void deleteByID (Long id);
     int deleteAllGlassJoint();
+    List<LabGlassware> findByVolume(int maxVol, int minVol);
 }

@@ -55,4 +55,13 @@ public class LabGlasswareDAOImpl implements LabGlasswareDAO{
         return entityManager.createQuery(
                 "DELETE FROM LabGlassware ").executeUpdate();
     }
+    
+    @Override
+    public List<LabGlassware> findByVolume(int maxVol, int minVol) {
+        TypedQuery<LabGlassware> findByVolumeRange = entityManager.createQuery(
+                "FROM LabGlassware WHERE capacityML <= :maxVol AND capacityML >= :minVol", LabGlassware.class);
+        findByVolumeRange.setParameter("maxVol", maxVol);
+        findByVolumeRange.setParameter("minVol", minVol);
+        return findByVolumeRange.getResultList();
+    }
 }

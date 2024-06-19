@@ -94,4 +94,9 @@ public class LabGlasswareRestController {
         return "LabGlassware with id: " + id + " was deleted.";
     }
     
+    @GetMapping("/labglasswarevol/{maxVol}/{minVol}")
+    public List<LabGlasswareDTO> findByVolRange (@PathVariable int maxVol, @PathVariable int minVol){
+        return labGlasswareService.findByVolume(maxVol, minVol);
+    }
+    
 }
