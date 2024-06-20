@@ -111,7 +111,18 @@ public class LabGlasswareModelController {
                 checkForErrors(labGlasswareModel);
                 
                 LabGlassware labGlassware = objectTranformer.transform(labGlasswareModel);
-                labGlasswareService.saveWithImage(labGlassware, imageFile);
+
+                if (imageFile.isEmpty()){
+                    // is object present in the DB and contains image?
+                    LabGlassware oldObject = labGlasswareService.findLabGlasswareByID(labGlassware.getId());
+                    if (oldObject != null){
+                        labGlassware.setImage(oldObject.getImage());
+                    }
+                    
+                    labGlasswareService.save(labGlassware);
+                } else {
+                    labGlasswareService.saveWithImage(labGlassware, imageFile);
+                }
                 
                 redirectAttributes.addFlashAttribute("successMessage", "Lab Glassware updated successfully.");
                 break;
@@ -137,8 +148,7 @@ In this way authorities restriction -> only ADMIN can DELETE is bypassed
     private void checkForErrors(LabGlasswareModel labGlasswareModel) {
         List<CoreError> errors = validator.validateLabGlasswareModel(labGlasswareModel);
         if(!errors.isEmpty()){
-            String message = errors.toString();
-            throw new LabGlasswareException(message);
+            throw new LabGlasswareException(errors.toString());
         }
     }
     

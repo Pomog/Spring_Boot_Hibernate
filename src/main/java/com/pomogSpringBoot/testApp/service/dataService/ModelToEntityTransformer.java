@@ -14,6 +14,7 @@ public class ModelToEntityTransformer implements ObjectTranformer<LabGlasswareMo
         LabGlassware labGlassware = new LabGlassware();
         labGlassware.setId(source.getId());
         labGlassware.setName(source.getName());
+        labGlassware.setImage(source.getImage());
         labGlassware.setBroken(source.getBroken());
         labGlassware.setRepaired(source.getRepaired());
         labGlassware.setMaterial(source.getMaterial());
