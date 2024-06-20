@@ -20,18 +20,25 @@
     <br><br>
     <span class="hide" sec:authentication="principal"></span>
 </p>
-<hr>
 <div class="my-button">
     <form action="#" th:action="@{/logout}" method="POST">
         <button type="submit" value="Logout" class="btn btn-warning">Logout</button>
     </form>
 </div>
+<hr>
+
 <div class="my-button">
     <form action="#" th:action="@{/list}" method="GET">
+
+        <label for="minVol">Maximum volume, mL</label>
+        <input type="number" id="minVol" name="minVol">
+
+        <label for="maxVol">Minimum volume, mL</label>
+        <input type="number" id="maxVol" name="maxVol">
+
         <button type="submit" class="btn btn-info">Glassware</button>
     </form>
 </div>
-
 <hr>
 
 <!-- Link to show all users -->
