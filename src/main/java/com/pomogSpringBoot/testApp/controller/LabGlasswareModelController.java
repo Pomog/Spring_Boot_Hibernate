@@ -56,10 +56,12 @@ public class LabGlasswareModelController {
     public String listLabGlasswareByCapacity(
             Model theModel,
            @RequestParam(value ="maxVol", required = false) Integer max,
-           @RequestParam(value ="minVol", required = false) Integer min
+           @RequestParam(value ="minVol", required = false) Integer min,
+           @RequestParam(value ="name", required = false) String name
+           
     ){
-        if (max != null && min != null && min > 0 && max > 0 && max >= min) {
-            theModel.addAttribute("labGlassware", labGlasswareService.findByVolume(max, min));
+        if ((min != null && max != null && min > 0 && max > 0 && min <= max) || name != null) {
+            theModel.addAttribute("labGlassware", labGlasswareService.findLabGlassware(name, min, max));
             return "lab-glassware-list";
         }
         theModel.addAttribute("labGlassware", labGlasswareService.findAllLabGlassware());

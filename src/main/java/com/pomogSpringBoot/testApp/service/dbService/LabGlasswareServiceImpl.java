@@ -2,10 +2,13 @@ package com.pomogSpringBoot.testApp.service.dbService;
 
 import com.pomogSpringBoot.testApp.dao.LabGlasswareDAO;
 import com.pomogSpringBoot.testApp.dao.LabGlasswareRepository;
+import com.pomogSpringBoot.testApp.dao.LabGlasswareSpecifications;
 import com.pomogSpringBoot.testApp.dto.LabGlasswareDTO;
 import com.pomogSpringBoot.testApp.entity.glassware.LabGlassware;
 import com.pomogSpringBoot.testApp.errorRespose.LabGlasswareException;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,7 +32,7 @@ public class LabGlasswareServiceImpl implements LabGlasswareService{
     
     @Override
     @Transactional
-    public LabGlasswareDTO save(LabGlassware labGlasswareReq){
+    public LabGlasswareDTO save(@NonNull LabGlassware labGlasswareReq){
         var labGlassware = createLabGlasswareFormReq(labGlasswareReq);
         LabGlassware savedLabGlassware = labGlasswareRepository.save(labGlassware);
 
@@ -107,6 +110,15 @@ public class LabGlasswareServiceImpl implements LabGlasswareService{
     @Override
     public List<LabGlasswareDTO> findByVolume(int maxVol, int minVol) {
         return this.labGlasswareDAO.findByVolume(maxVol, minVol).stream()
+                .map(LabGlasswareDTO::new)
+                .collect(Collectors.toList());
+    }
+    
+    @Override
+    public List<LabGlasswareDTO> findLabGlassware(String name, Integer minVol, Integer maxVol) {
+        Specification<LabGlassware> spec = Specification.where(LabGlasswareSpecifications.hasName(name))
+                .and(LabGlasswareSpecifications.hasVolumeBetween(minVol, maxVol));
+        return labGlasswareRepository.findAll(spec).stream()
                 .map(LabGlasswareDTO::new)
                 .collect(Collectors.toList());
     }
