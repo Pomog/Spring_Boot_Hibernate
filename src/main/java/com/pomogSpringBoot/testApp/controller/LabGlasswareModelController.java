@@ -60,6 +60,9 @@ public class LabGlasswareModelController {
            @RequestParam(value ="name", required = false) String name
            
     ){
+        /*
+        Here interface Specification and JpaRepository used
+         */
         if ((min != null && max != null && min > 0 && max > 0 && min <= max) || name != null) {
             theModel.addAttribute("labGlassware", labGlasswareService.findLabGlassware(name, min, max));
             return "lab-glassware-list";
