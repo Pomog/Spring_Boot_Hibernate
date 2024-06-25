@@ -46,6 +46,11 @@ public class LabGlasswareDAOImpl implements LabGlasswareDAO{
     }
     
     @Override
+    public List<LabGlassware> brokenAndRepaired(Boolean broken, Boolean repaired) {
+        return null;
+    }
+    
+    @Override
     public void deleteByID(Long id) {
         entityManager.remove(entityManager.find(LabGlassware.class, id));
     }
