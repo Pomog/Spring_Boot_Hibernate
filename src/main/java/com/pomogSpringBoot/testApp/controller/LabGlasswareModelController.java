@@ -102,7 +102,7 @@ public class LabGlasswareModelController {
         /*
         Here interface Specification and JpaRepository used
         */
-        if ((min != null && max != null && min > 0 && max > 0 && min <= max) || name != null) {
+        if ((min != null && max != null && min > 0 && max > 0 && min <= max) || name != null || broken != null || repaired != null) {
             labGlasswareList = labGlasswareService.findLabGlassware(filter);
         } else {
             labGlasswareList = labGlasswareService.findAllLabGlassware();
