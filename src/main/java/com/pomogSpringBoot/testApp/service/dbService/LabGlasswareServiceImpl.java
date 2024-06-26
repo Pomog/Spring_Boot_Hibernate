@@ -115,9 +115,10 @@ public class LabGlasswareServiceImpl implements LabGlasswareService{
     }
     
     @Override
-    public List<LabGlasswareDTO> findLabGlassware(String name, Integer minVol, Integer maxVol) {
-        Specification<LabGlassware> spec = Specification.where(LabGlasswareSpecifications.hasName(name))
-                .and(LabGlasswareSpecifications.hasVolumeBetween(minVol, maxVol));
+    public List<LabGlasswareDTO> findLabGlassware(LabGlasswareFilter filter) {
+        Specification<LabGlassware> spec = Specification.where(LabGlasswareSpecifications.hasName(filter.getName()))
+                .and(LabGlasswareSpecifications.hasVolumeBetween(filter.getMinVol(), filter.getMaxVol())
+                .and(LabGlasswareSpecifications.brokenRepaired(filter.getBroken(), filter.getRepaired())));
         return labGlasswareRepository.findAll(spec).stream()
                 .map(LabGlasswareDTO::new)
                 .collect(Collectors.toList());

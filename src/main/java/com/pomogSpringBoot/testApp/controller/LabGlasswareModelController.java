@@ -1,10 +1,12 @@
 package com.pomogSpringBoot.testApp.controller;
 
+import com.pomogSpringBoot.testApp.dto.LabGlasswareDTO;
 import com.pomogSpringBoot.testApp.entity.glassware.JointType;
 import com.pomogSpringBoot.testApp.entity.glassware.LabGlassware;
 import com.pomogSpringBoot.testApp.errorRespose.LabGlasswareException;
 import com.pomogSpringBoot.testApp.errorRespose.error.CoreError;
 import com.pomogSpringBoot.testApp.service.dataService.ObjectTranformer;
+import com.pomogSpringBoot.testApp.service.dbService.LabGlasswareFilter;
 import com.pomogSpringBoot.testApp.service.dbService.LabGlasswareService;
 import com.pomogSpringBoot.testApp.service.validators.ModelValidator;
 import com.pomogSpringBoot.testApp.model.GlassJointModel;
@@ -29,25 +31,51 @@ import java.util.List;
 
 @Controller
 public class LabGlasswareModelController {
+    private static final Logger logger = LoggerFactory.getLogger(LabGlasswareModelController.class);
     @Qualifier("LabGlasswareModelValidator")
     private final ModelValidator validator;
     private final ObjectTranformer<LabGlasswareModel, LabGlassware> objectTranformer;
     private final LabGlasswareService labGlasswareService;
-    private static final Logger logger = LoggerFactory.getLogger(LabGlasswareModelController.class);
     
     @Autowired
     public LabGlasswareModelController(
             ModelValidator validator,
             ObjectTranformer<LabGlasswareModel,
-            LabGlassware> objectTranformer,
+                    LabGlassware> objectTranformer,
             LabGlasswareService labGlasswareService) {
         this.validator = validator;
         this.objectTranformer = objectTranformer;
         this.labGlasswareService = labGlasswareService;
     }
     
+    private static void extractModel(LabGlasswareModel labGlasswareModel, List<String> jointTypes, List<String> sizeDesignations) {
+        if (jointTypes.size() != sizeDesignations.size()) {
+            throw new IllegalArgumentException("The size of jointTypes and sizeDesignations must be the same");
+        }
+        
+        for (int i = 0; i < jointTypes.size(); i++) {
+            GlassJointModel glassJointModel = new GlassJointModel();
+            
+            String jointType = jointTypes.get(i);
+            if (jointType != null && !jointType.isEmpty()) {
+                try {
+                    glassJointModel.setType(JointType.valueOf(jointType));
+                } catch (IllegalArgumentException e) {
+                    throw new IllegalArgumentException("Invalid JointType: " + jointType, e);
+                }
+            }
+            
+            String sizeDesignation = sizeDesignations.get(i);
+            if (sizeDesignation != null && !sizeDesignation.isEmpty()) {
+                glassJointModel.setSizeDesignation(sizeDesignation);
+            }
+            
+            labGlasswareModel.addGlassJoint(glassJointModel);
+        }
+    }
+    
     @InitBinder
-    public void stringTrimmer(WebDataBinder webDataBinder){
+    public void stringTrimmer(WebDataBinder webDataBinder) {
         StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
         webDataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
     }
@@ -55,28 +83,39 @@ public class LabGlasswareModelController {
     @GetMapping("/list")
     public String listLabGlasswareByCapacity(
             Model theModel,
-           @RequestParam(value ="maxVol", required = false) Integer max,
-           @RequestParam(value ="minVol", required = false) Integer min,
-           @RequestParam(value ="name", required = false) String name
-           
-    ){
+            @RequestParam(value = "maxVol", required = false) Integer max,
+            @RequestParam(value = "minVol", required = false) Integer min,
+            @RequestParam(value = "name", required = false) String name,
+            @RequestParam(value = "broken", required = false) Boolean broken,
+            @RequestParam(value = "repaired", required = false) Boolean repaired
+    
+    ) {
+        LabGlasswareFilter filter = new LabGlasswareFilter();
+        filter.setMaxVol(max);
+        filter.setMinVol(min);
+        filter.setName(name);
+        filter.setBroken(broken);
+        filter.setRepaired(repaired);
+        
+        List<LabGlasswareDTO> labGlasswareList;
+        
         /*
         Here interface Specification and JpaRepository used
-         */
+        */
         if ((min != null && max != null && min > 0 && max > 0 && min <= max) || name != null) {
-            theModel.addAttribute("labGlassware", labGlasswareService.findLabGlassware(name, min, max));
-            return "lab-glassware-list";
+            labGlasswareList = labGlasswareService.findLabGlassware(filter);
+        } else {
+            labGlasswareList = labGlasswareService.findAllLabGlassware();
         }
-        theModel.addAttribute("labGlassware", labGlasswareService.findAllLabGlassware());
+        
+        theModel.addAttribute("labGlassware", labGlasswareList);
         return "lab-glassware-list";
     }
-    
     
     @GetMapping("/lab-glassware-form")
     public String showForm(
             Model theModel,
-            @RequestParam(value ="id", required = false) long id)
-    {
+            @RequestParam(value = "id", required = false) long id) {
         if (id != 0) {
             LabGlassware labGlassware = labGlasswareService.findLabGlasswareByID(id);
             theModel.addAttribute("labGlasswareModel", new LabGlasswareModel(labGlassware));
@@ -99,7 +138,7 @@ public class LabGlasswareModelController {
             @RequestParam("action") String action,
             @RequestParam(value = "imageFile", required = false) MultipartFile imageFile) {
         
-        if (bindingResult.hasErrors() && !action.equals("delete")){
+        if (bindingResult.hasErrors() && !action.equals("delete")) {
             return "lab-glassware-form";
         }
         
@@ -116,11 +155,11 @@ public class LabGlasswareModelController {
                 checkForErrors(labGlasswareModel);
                 
                 LabGlassware labGlassware = objectTranformer.transform(labGlasswareModel);
-
-                if (imageFile.isEmpty()){
+                
+                if (imageFile.isEmpty()) {
                     // is object present in the DB and contains image?
                     LabGlassware oldObject = labGlasswareService.findLabGlasswareByID(labGlassware.getId());
-                    if (oldObject != null){
+                    if (oldObject != null) {
                         labGlassware.setImage(oldObject.getImage());
                     }
                     
@@ -131,7 +170,7 @@ public class LabGlasswareModelController {
                 
                 redirectAttributes.addFlashAttribute("successMessage", "Lab Glassware updated successfully.");
                 break;
- 
+            
             case "delete":
 /*
 TODO: This is CODE error: processLabGlasswareSaveForm works with POST but runs DELETE in the DB
@@ -152,35 +191,9 @@ In this way authorities restriction -> only ADMIN can DELETE is bypassed
     
     private void checkForErrors(LabGlasswareModel labGlasswareModel) {
         List<CoreError> errors = validator.validateLabGlasswareModel(labGlasswareModel);
-        if(!errors.isEmpty()){
+        if (!errors.isEmpty()) {
             throw new LabGlasswareException(errors.toString());
         }
     }
     
-    private static void extractModel(LabGlasswareModel labGlasswareModel, List<String> jointTypes, List<String> sizeDesignations) {
-        if (jointTypes.size() != sizeDesignations.size()) {
-            throw new IllegalArgumentException("The size of jointTypes and sizeDesignations must be the same");
-        }
-        
-        for (int i = 0; i < jointTypes.size(); i++) {
-            GlassJointModel glassJointModel = new GlassJointModel();
-
-            String jointType = jointTypes.get(i);
-            if (jointType != null && !jointType.isEmpty()) {
-                try {
-                    glassJointModel.setType(JointType.valueOf(jointType));
-                } catch (IllegalArgumentException e) {
-                    throw new IllegalArgumentException("Invalid JointType: " + jointType, e);
-                }
-            }
-            
-            String sizeDesignation = sizeDesignations.get(i);
-            if (sizeDesignation != null && !sizeDesignation.isEmpty()) {
-                glassJointModel.setSizeDesignation(sizeDesignation);
-            }
-            
-            labGlasswareModel.addGlassJoint(glassJointModel);
-        }
-    }
-
 }
