@@ -47,3 +47,16 @@ th.sort-desc::after {
 .add-button {
     margin: 5px 0;
 }
+
+.search-filter {
+    padding: 5px;
+    width: 200px;
+    margin-right: 10px;
+}
+
+.input-field {
+    margin: 5px;
+    width: 100%;
+    max-width: 300px;
+    box-sizing: border-box;
+}
