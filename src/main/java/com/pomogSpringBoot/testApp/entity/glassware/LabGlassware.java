@@ -95,6 +95,12 @@ public class LabGlassware {
         if (statuses == null) {
             statuses = new ArrayList<>();
         }
-        this.statuses.add(status);
+        if (!this.statuses.contains(status)) {
+            this.statuses.add(status);
+            status.addLabGlassware(this);
+        }
+        
+        System.out.println("FROM Labglassware Class");
+        System.out.println(this);
     }
 }

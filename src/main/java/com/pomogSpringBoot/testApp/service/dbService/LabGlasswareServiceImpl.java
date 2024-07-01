@@ -38,6 +38,9 @@ public class LabGlasswareServiceImpl implements LabGlasswareService{
         
         System.out.println("labGlassware SERVICE");
         System.out.println(labGlassware);
+        System.out.println("savedLabGlassware");
+        System.out.println(savedLabGlassware);
+        
 
         return new LabGlasswareDTO(savedLabGlassware);
     }

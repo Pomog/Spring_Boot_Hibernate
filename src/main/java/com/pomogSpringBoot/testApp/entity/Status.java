@@ -41,6 +41,9 @@ public class Status {
         if (labGlasswareList == null){
             labGlasswareList = new ArrayList<>();
         }
-        labGlasswareList.add(labGlassware);
+        if (this.labGlasswareList.contains(labGlassware)) {
+            labGlasswareList.add(labGlassware);
+            labGlassware.addStatus(this);
+        }
     }
 }
