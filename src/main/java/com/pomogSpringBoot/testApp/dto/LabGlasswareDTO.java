@@ -1,5 +1,6 @@
 package com.pomogSpringBoot.testApp.dto;
 
+import com.pomogSpringBoot.testApp.entity.Status;
 import com.pomogSpringBoot.testApp.entity.glassware.LabGlassware;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
@@ -44,7 +46,9 @@ public class LabGlasswareDTO {
         this.repaired = labGlassware.getRepaired() != null ? labGlassware.getRepaired() : false;
         this.manufacturer = labGlassware.getManufacturer();
         this.location = labGlassware.getLocation();
-        this.status = labGlassware.getStatus();
+        this.status = labGlassware.getStatuses().stream()
+                .map(Status::getName)
+                .collect(Collectors.joining(", "));
         this.purchaseDate = labGlassware.getPurchaseDate();
         this.calibrationDate = labGlassware.getCalibrationDate();
         this.lastMaintenanceDate = labGlassware.getLastMaintenanceDate();

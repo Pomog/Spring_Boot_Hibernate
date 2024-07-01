@@ -1,14 +1,27 @@
 package com.pomogSpringBoot.testApp.service.dataService;
 
+import com.pomogSpringBoot.testApp.dao.StatusRepository;
+import com.pomogSpringBoot.testApp.entity.Status;
 import com.pomogSpringBoot.testApp.entity.glassware.GlassJoint;
 import com.pomogSpringBoot.testApp.entity.glassware.LabGlassware;
 import com.pomogSpringBoot.testApp.model.LabGlasswareModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class ModelToEntityTransformer implements ObjectTranformer<LabGlasswareModel, LabGlassware> {
+    private StatusRepository statusRepository;
+    
+    @Autowired
+    public ModelToEntityTransformer(StatusRepository statusRepository) {
+        this.statusRepository = statusRepository;
+    }
+    
     @Override
     public LabGlassware transform(LabGlasswareModel source) {
         LabGlassware labGlassware = new LabGlassware();
@@ -20,7 +33,13 @@ public class ModelToEntityTransformer implements ObjectTranformer<LabGlasswareMo
         labGlassware.setMaterial(source.getMaterial());
         labGlassware.setManufacturer(source.getManufacturer());
         labGlassware.setLocation(source.getLocation());
-        labGlassware.setStatus(source.getStatus());
+        if (source.getStatus() != null && !source.getStatus().isEmpty()) {
+            List<Status> statuses = Arrays.stream(source.getStatus().split(","))
+                    .map(String::trim)
+                    .map(this::findOrCreateStatus)
+                    .toList();
+            statuses.forEach(labGlassware::addStatus);
+        }
         labGlassware.setPrice(source.getPrice());
         labGlassware.setProvider(source.getProvider());
         labGlassware.setCapacityML(source.getCapacityML());
@@ -45,6 +64,15 @@ public class ModelToEntityTransformer implements ObjectTranformer<LabGlasswareMo
             });
         }
         return labGlassware;
+    }
+    
+    private Status findOrCreateStatus(String statusName) {
+            Status status = statusRepository.findByName(statusName);
+            if (status == null) {
+                status = new Status(statusName);
+                statusRepository.save(status);
+            }
+            return status;
     }
     
     private Date parseStringToSQLDate(String dateFromTheHTTP) {

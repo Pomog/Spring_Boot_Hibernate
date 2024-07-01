@@ -35,6 +35,9 @@ public class LabGlasswareServiceImpl implements LabGlasswareService{
     public LabGlasswareDTO save(@NonNull LabGlassware labGlasswareReq){
         var labGlassware = createLabGlasswareFormReq(labGlasswareReq);
         LabGlassware savedLabGlassware = labGlasswareRepository.save(labGlassware);
+        
+        System.out.println("labGlassware SERVICE");
+        System.out.println(labGlassware);
 
         return new LabGlasswareDTO(savedLabGlassware);
     }
@@ -49,6 +52,8 @@ public class LabGlasswareServiceImpl implements LabGlasswareService{
             throw new LabGlasswareException(e.getMessage());
             
         }
+        System.out.println("labGlassware SERVICE");
+        System.out.println(labGlassware);
         LabGlassware savedLabGlassware = labGlasswareRepository.save(labGlassware);
         
         return new LabGlasswareDTO(savedLabGlassware);

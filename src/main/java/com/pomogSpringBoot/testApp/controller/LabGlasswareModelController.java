@@ -118,7 +118,8 @@ public class LabGlasswareModelController {
             @RequestParam(value = "id", required = false) long id) {
         if (id != 0) {
             LabGlassware labGlassware = labGlasswareService.findLabGlasswareByID(id);
-            theModel.addAttribute("labGlasswareModel", new LabGlasswareModel(labGlassware));
+            var labGlasswareModel = new LabGlasswareModel(labGlassware);
+            theModel.addAttribute("labGlasswareModel", labGlasswareModel);
         } else {
             theModel.addAttribute("labGlasswareModel", new LabGlasswareModel());
         }
@@ -151,10 +152,17 @@ public class LabGlasswareModelController {
         
         switch (action) {
             case "update":
+                System.out.println("CASE update");
                 extractModel(labGlasswareModel, jointTypes, sizeDesignations);
                 checkForErrors(labGlasswareModel);
                 
+                System.out.println("labGlasswareModel");
+                System.out.println(labGlasswareModel);
+                
                 LabGlassware labGlassware = objectTranformer.transform(labGlasswareModel);
+                
+                System.out.println("labGlassware");
+                System.out.println(labGlassware);
                 
                 if (imageFile.isEmpty()) {
                     // is object present in the DB and contains image?

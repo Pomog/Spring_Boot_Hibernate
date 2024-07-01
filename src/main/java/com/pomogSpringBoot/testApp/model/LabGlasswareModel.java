@@ -1,5 +1,6 @@
 package com.pomogSpringBoot.testApp.model;
 
+import com.pomogSpringBoot.testApp.entity.Status;
 import com.pomogSpringBoot.testApp.entity.glassware.LabGlassware;
 import com.pomogSpringBoot.testApp.validation.FieldValidation;
 import jakarta.validation.constraints.Min;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @Component
@@ -56,7 +58,9 @@ public class LabGlasswareModel{
         this.repaired = labGlassware.getRepaired();
         this.manufacturer = labGlassware.getManufacturer();
         this.location = labGlassware.getLocation();
-        this.status = labGlassware.getStatus();
+        this.status = labGlassware.getStatuses().stream()
+                .map(Status::getName)
+                .collect(Collectors.joining(", "));
         this.purchaseDate = labGlassware.getPurchaseDate() != null ? labGlassware.getPurchaseDate().toString() : null;
         this.calibrationDate = labGlassware.getCalibrationDate() != null ? labGlassware.getCalibrationDate().toString() : null;
         this.lastMaintenanceDate = labGlassware.getLastMaintenanceDate() != null ? labGlassware.getLastMaintenanceDate().toString() : null;

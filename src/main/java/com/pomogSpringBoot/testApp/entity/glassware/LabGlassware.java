@@ -1,8 +1,11 @@
 package com.pomogSpringBoot.testApp.entity.glassware;
 
+import com.pomogSpringBoot.testApp.entity.Status;
 import jakarta.persistence.*;
-import lombok.*;
-import org.hibernate.annotations.Type;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -45,8 +48,15 @@ public class LabGlassware {
     @Column(name = "location")
     private String location;
     
-    @Column(name = "status")
-    private String status;
+    @ManyToMany(
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "labglassware-status",
+            joinColumns = @JoinColumn(name = "status"),
+            inverseJoinColumns = @JoinColumn(name = "labGlassware")
+    )
+    private List<Status> statuses = new ArrayList<>();
     
     @Column(name = "purchase_date")
     private Date purchaseDate;
@@ -79,5 +89,12 @@ public class LabGlassware {
         }
         this.glassJoints.add(glassJoint);
         glassJoint.setLabGlassware(this);
+    }
+    
+    public void addStatus(Status status) {
+        if (statuses == null) {
+            statuses = new ArrayList<>();
+        }
+        this.statuses.add(status);
     }
 }
