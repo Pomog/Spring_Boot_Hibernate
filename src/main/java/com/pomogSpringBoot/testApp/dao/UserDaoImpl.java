@@ -5,6 +5,7 @@ import com.pomogSpringBoot.testApp.entity.user.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,5 +33,11 @@ public class UserDaoImpl implements UserDao {
         TypedQuery<User> findAllQuery = entityManager.createQuery("FROM User ", User.class);
         
         return findAllQuery.getResultList();
+    }
+    
+    @Override
+    @Transactional
+    public void addUser(User newUser) {
+        entityManager.persist(newUser);
     }
 }

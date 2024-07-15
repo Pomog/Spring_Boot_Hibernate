@@ -2,6 +2,7 @@ package com.pomogSpringBoot.testApp.service.dbService;
 
 import com.pomogSpringBoot.testApp.dao.AuthorityDAO;
 import com.pomogSpringBoot.testApp.dao.UserDao;
+import com.pomogSpringBoot.testApp.dto.UserDTO;
 import com.pomogSpringBoot.testApp.entity.user.Authority;
 import com.pomogSpringBoot.testApp.entity.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +30,17 @@ public class UserServiceImpl implements UserService{
     
     @Override
     public User findByUserName(String userName) {
-        User foundUser = userDao.findByUserName(userName);
-        return foundUser;
+        return userDao.findByUserName(userName);
     }
     
     @Override
     public List<User> findAllUsers() {
         return userDao.findAllUsers();
+    }
+    
+    @Override
+    public void saveUser(User user) {
+        userDao.addUser(user);
     }
     
     @Override

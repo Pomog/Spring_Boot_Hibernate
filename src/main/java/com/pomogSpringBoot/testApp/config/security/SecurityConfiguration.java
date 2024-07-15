@@ -34,7 +34,8 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(configurer ->
                         configurer
-                                .requestMatchers("/CSS/**", "/js/**", "/img/**", "/access-denied").permitAll()
+                                .requestMatchers("/CSS/**", "/js/**", "/img/**", "/access-denied", "/user/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/user/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole(UserRole.USER.name(), UserRole.MANAGER.name(), UserRole.ADMIN.name())
                                 .requestMatchers(HttpMethod.POST, "/api/**").hasAnyRole(UserRole.MANAGER.name(), UserRole.ADMIN.name())
                                 .requestMatchers(HttpMethod.PUT, "/api/**").hasAnyRole(UserRole.MANAGER.name(), UserRole.ADMIN.name())
@@ -60,9 +61,10 @@ public class SecurityConfiguration {
                         configurer
                                 .accessDeniedPage("/access-denied"))
               
-                ;
+                
 //        http.httpBasic(Customizer.withDefaults());
 //        http.csrf(AbstractHttpConfigurer::disable);
+        .csrf().disable();
         return http.build();
     }
 }
