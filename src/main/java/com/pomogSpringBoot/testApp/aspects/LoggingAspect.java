@@ -11,4 +11,9 @@ public class LoggingAspect {
     public void beforeSaveAdvice(){
         System.out.println("\n =============> execution @Before advice");
     }
+    
+    @Before("execution(* save(*))")
+    public void beforeAnySaveAdvice(){
+        System.out.println("\n =============> execution @Before advice for any save method");
+    }
 }

@@ -17,7 +17,7 @@ public class Application {
 	@Bean
 	public CommandLineRunner commandLineRunner(LabGlasswareDAO labGlasswareDAO){
 		return  args -> {
-			demoTheBeforeAdvice(labGlasswareDAO);
+		//	demoTheBeforeAdvice(labGlasswareDAO);
 		};
 	}
 	
