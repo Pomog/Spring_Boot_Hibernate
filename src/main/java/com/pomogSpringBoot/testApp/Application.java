@@ -17,12 +17,17 @@ public class Application {
 	@Bean
 	public CommandLineRunner commandLineRunner(LabGlasswareDAO labGlasswareDAO){
 		return  args -> {
-		//	demoTheBeforeAdvice(labGlasswareDAO);
+			demoTheBeforeAdvice(labGlasswareDAO);
+			checkBeforeAnyMethodWithLong(1L);
 		};
 	}
 	
 	private void demoTheBeforeAdvice(LabGlasswareDAO labGlasswareDAO) {
 		LabGlassware test = new LabGlassware("test", false, false);
 		labGlasswareDAO.save(test);
+	}
+	
+	private void checkBeforeAnyMethodWithLong (Long l){
+		System.out.println(l);
 	}
 }

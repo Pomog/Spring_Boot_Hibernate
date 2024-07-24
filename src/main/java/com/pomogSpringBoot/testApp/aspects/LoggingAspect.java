@@ -12,8 +12,17 @@ public class LoggingAspect {
         System.out.println("\n =============> execution @Before advice");
     }
     
-    @Before("execution(* save(*))")
+    @Before("execution(* save(..))")
     public void beforeAnySaveAdvice(){
         System.out.println("\n =============> execution @Before advice for any save method");
+    }
+    
+    // TODO: it is not worked
+    /*
+    not a Spring-managed bean MAYBE
+     */
+    @Before("execution(* checkBefore*(..))")
+    public void beforeAnyMethodWithLong (){
+        System.out.println("\n =============> execution @Before advice for any method with one param Long type");
     }
 }
