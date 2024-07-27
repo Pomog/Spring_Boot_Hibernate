@@ -25,4 +25,15 @@ public class LoggingAspect {
     public void beforeAnyMethodWithLong (){
         System.out.println("\n =============> execution @Before advice for any method with one param Long type");
     }
+    
+    @Before("execution(* filterChain*(..))")
+    public void beforeFilterChain (){
+        System.out.println("\n =============> execution @Before advice for the filterChain");
+    }
+    
+    // TODO: it is not worked, Broad pointcuts gives error
+//    @Before("execution(* *())")
+//    public void transform (){
+//        System.out.println("\n =============> execution @Before advice for any transform method");
+//    }
 }
