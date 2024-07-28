@@ -8,12 +8,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoggingAspect {
     @Before("execution(public com.pomogSpringBoot.testApp.entity.glassware.LabGlassware save(com.pomogSpringBoot.testApp.entity.glassware.LabGlassware))")
-    public void beforeSaveAdvice(){
+    public void beforeSaveAdvice() {
         System.out.println("\n =============> execution @Before advice");
     }
     
     @Before("execution(* save(..))")
-    public void beforeAnySaveAdvice(){
+    public void beforeAnySaveAdvice() {
         System.out.println("\n =============> execution @Before advice for any save method");
     }
     
@@ -22,12 +22,12 @@ public class LoggingAspect {
     not a Spring-managed bean MAYBE
      */
     @Before("execution(* checkBefore*(..))")
-    public void beforeAnyMethodWithLong (){
+    public void beforeAnyMethodWithLong() {
         System.out.println("\n =============> execution @Before advice for any method with one param Long type");
     }
     
     @Before("execution(* filterChain*(..))")
-    public void beforeFilterChain (){
+    public void beforeFilterChain() {
         System.out.println("\n =============> execution @Before advice for the filterChain");
     }
     
@@ -36,4 +36,10 @@ public class LoggingAspect {
 //    public void transform (){
 //        System.out.println("\n =============> execution @Before advice for any transform method");
 //    }
+    
+    // Broad pointcuts for my project
+    @Before("execution(* com.pomogSpringBoot.testApp.*.* (..))")
+    public void beforeAnyMethod() {
+        System.out.println("\n =============> execution @Before advice for any method");
+    }
 }
