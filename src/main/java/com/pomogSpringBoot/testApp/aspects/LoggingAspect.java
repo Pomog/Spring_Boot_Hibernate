@@ -38,7 +38,7 @@ public class LoggingAspect {
 //    }
     
     // Broad pointcuts for my project
-    @Before("execution(* com.pomogSpringBoot.testApp.*.* (..))")
+    @Before("execution(* com.pomogSpringBoot.testApp.*.*.* (..))")
     public void beforeAnyMethod() {
         System.out.println("\n =============> execution @Before advice for any method");
     }
