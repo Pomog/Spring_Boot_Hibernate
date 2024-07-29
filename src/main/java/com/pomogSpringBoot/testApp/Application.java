@@ -17,8 +17,7 @@ public class Application {
 	@Bean
 	public CommandLineRunner commandLineRunner(LabGlasswareDAO labGlasswareDAO){
 		return  args -> {
-			demoTheBeforeAdvice(labGlasswareDAO);
-			checkBeforeAnyMethodWithLong(1L);
+
 		};
 	}
 	
