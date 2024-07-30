@@ -3,50 +3,22 @@ package com.pomogSpringBoot.testApp.aspects;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
 public class LoggingAspect {
-    /*
-    @Before("execution(public com.pomogSpringBoot.testApp.entity.glassware.LabGlassware save(com.pomogSpringBoot.testApp.entity.glassware.LabGlassware))")
-    public void beforeSaveAdvice() {
-        System.out.println("\n =============> execution @Before advice");
-    }
-
-    @Before("execution(* save(..))")
-    public void beforeAnySaveAdvice() {
-        System.out.println("\n =============> execution @Before advice for any save method");
-    }
-    
-     */
-    
-    // TODO: it is not worked
-    /*
-    not a Spring-managed bean MAYBE
-     */
-    @Before("execution(* checkBefore*(..))")
-    public void beforeAnyMethodWithLong() {
-        System.out.println("\n =============> execution @Before advice for any method with one param Long type");
-    }
-    
-    @Before("execution(* filterChain*(..))")
-    public void beforeFilterChain() {
-        System.out.println("\n =============> execution @Before advice for the filterChain");
-    }
-    
-    // TODO: it is not worked, Broad pointcuts gives error
-//    @Before("execution(* *())")
-//    public void transform (){
-//        System.out.println("\n =============> execution @Before advice for any transform method");
-//    }
+    @Pointcut("execution(* com.pomogSpringBoot.testApp.*.*.* (..))")
+    private void forAnyMethodInTheProject(){}
     
     // Broad pointcuts for my project
-    @Before("execution(* com.pomogSpringBoot.testApp.*.*.* (..))")
+    @Before("forAnyMethodInTheProject()")
     public void beforeAnyMethod(JoinPoint joinPoint) {
-        System.out.println("\n =============> execution @Before advice for any method");
+        System.out.println("\n =============> execution @Before advice for method");
         String className = joinPoint.getTarget().getClass().getSimpleName();
         String methodName = joinPoint.getSignature().getName();
         System.out.println(className+"."+methodName);
     }
+
 }
