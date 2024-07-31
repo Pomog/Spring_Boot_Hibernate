@@ -20,13 +20,5 @@ public class Application {
 
 		};
 	}
-	
-	private void demoTheBeforeAdvice(LabGlasswareDAO labGlasswareDAO) {
-		LabGlassware test = new LabGlassware("test", false, false);
-		labGlasswareDAO.save(test);
-	}
-	
-	private void checkBeforeAnyMethodWithLong (Long l){
-		System.out.println(l);
-	}
+
 }
