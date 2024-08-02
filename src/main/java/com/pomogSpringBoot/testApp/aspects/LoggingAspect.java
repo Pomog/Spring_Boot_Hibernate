@@ -17,6 +17,9 @@ public class LoggingAspect {
     @Pointcut("execution(* com.pomogSpringBoot.testApp.dao.*.* (..))")
     private void forAnyMethodFromTheDaoPackage(){}
     
+    @Pointcut("execution(* com.pomogSpringBoot.testApp.*.*.find* (..))")
+    private void forAnyFind(){}
+    
     // Broad pointcuts for my project
     @Before("forAnyMethodInTheProject()")
     public void beforeAnyMethod(JoinPoint joinPoint) {
@@ -26,9 +29,9 @@ public class LoggingAspect {
         System.out.println(className+"."+methodName);
     }
     
-    @Before("forAnyMethodFromTheDaoPackage()")
+    @Before("forAnyMethodFromTheDaoPackage() && !forAnyFind()")
     public void beforeAnyDaoMethod(JoinPoint joinPoint) {
-        System.out.println("\n =============> execution @Before advice for method form DAO");
+        System.out.println("\n =============> execution @Before advice for method form DAO, exclude FIND");
         String className = joinPoint.getTarget().getClass().getSimpleName();
         String methodName = joinPoint.getSignature().getName();
         String argsAsString = Arrays.toString(joinPoint.getArgs());
