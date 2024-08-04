@@ -6,6 +6,7 @@ import org.aspectj.lang.annotation.Before;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 
 @Aspect
@@ -19,7 +20,28 @@ public class LoggingAspect {
         System.out.println("\n =============> execution @Before advice for ALL methods");
         String className = joinPoint.getTarget().getClass().getSimpleName();
         String methodName = joinPoint.getSignature().getName();
+        System.out.println(joinPoint.getStaticPart());
         System.out.println(className+"."+methodName);
+        System.out.println(Arrays.toString(joinPoint.getArgs()));
+        
+        try {
+            // Get the class object
+            Class<?> clazz = joinPoint.getTarget().getClass();
+            
+            // Find the method with the matching name and parameter types
+            Method method = Arrays.stream(clazz.getMethods())
+                    .filter(m -> m.getName().equals(methodName) &&
+                            Arrays.equals(m.getParameterTypes(), Arrays.stream(joinPoint.getArgs())
+                                    .map(Object::getClass).toArray(Class<?>[]::new)))
+                    .findFirst()
+                    .orElseThrow(() -> new NoSuchMethodException("Method not found: " + methodName));
+            
+            // Get the return type of the method
+            Class<?> returnType = method.getReturnType();
+            System.out.println("Return type: " + returnType.getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     @Before("AopExpressions.forAnyMethodFromTheDaoPackage() && !AopExpressions.forAnyFind()")
