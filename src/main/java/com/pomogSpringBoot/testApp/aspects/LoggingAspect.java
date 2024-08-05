@@ -1,6 +1,8 @@
 package com.pomogSpringBoot.testApp.aspects;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.core.annotation.Order;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.List;
 
 @Aspect
 @Order(1)
@@ -21,9 +24,10 @@ public class LoggingAspect {
         String className = joinPoint.getTarget().getClass().getSimpleName();
         String methodName = joinPoint.getSignature().getName();
         System.out.println(joinPoint.getStaticPart());
-        System.out.println(className+"."+methodName);
+        System.out.println(className + "." + methodName);
         System.out.println(Arrays.toString(joinPoint.getArgs()));
         
+        /*
         try {
             // Get the class object
             Class<?> clazz = joinPoint.getTarget().getClass();
@@ -42,6 +46,8 @@ public class LoggingAspect {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+         */
     }
     
     @Before("AopExpressions.forAnyMethodFromTheDaoPackage() && !AopExpressions.forAnyFind()")
@@ -50,9 +56,17 @@ public class LoggingAspect {
         String className = joinPoint.getTarget().getClass().getSimpleName();
         String methodName = joinPoint.getSignature().getName();
         String argsAsString = Arrays.toString(joinPoint.getArgs());
-        System.out.println(className+"."+methodName+"\n"+argsAsString);
+        System.out.println(className + "." + methodName + "\n" + argsAsString);
     }
     
-
-
+    @AfterReturning(
+            pointcut = "AopExpressions.forDeleting()"
+    )
+    public void afterHappyAnyMethod(JoinPoint joinPoint) {
+        String methodName = joinPoint.getSignature().getName();
+        System.out.println(" executed \n" + methodName + ": " + Arrays.toString(joinPoint.getArgs()));
+//        System.out.println("returning: " + results);
+    }
+    
+    
 }
