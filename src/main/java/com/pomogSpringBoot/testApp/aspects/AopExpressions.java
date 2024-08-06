@@ -17,4 +17,7 @@ public class AopExpressions {
     
     @Pointcut("execution(* com.pomogSpringBoot.testApp.*.*.delete* (..))")
     public void forDeleting(){}
+    
+    @Pointcut("execution(* com.pomogSpringBoot.testApp.*.*.find* (..))")
+    public void forFind(){}
 }

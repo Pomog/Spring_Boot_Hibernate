@@ -59,13 +59,16 @@ public class LoggingAspect {
         System.out.println(className + "." + methodName + "\n" + argsAsString);
     }
     
+    /*
+    The advice not work when returning type not a List
+     */
     @AfterReturning(
-            pointcut = "AopExpressions.forDeleting()"
-    )
-    public void afterHappyAnyMethod(JoinPoint joinPoint) {
+            pointcut = "AopExpressions.forFind()",
+            returning = "results")
+    public void afterHappyAnyMethod(JoinPoint joinPoint, List<?> results)  {
         String methodName = joinPoint.getSignature().getName();
         System.out.println(" executed \n" + methodName + ": " + Arrays.toString(joinPoint.getArgs()));
-//        System.out.println("returning: " + results);
+        System.out.println("returning: " + results.size() + " entities");
     }
     
     
