@@ -1,5 +1,6 @@
 package com.pomogSpringBoot.testApp.aspects;
 
+import com.pomogSpringBoot.testApp.entity.glassware.LabGlassware;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -69,6 +70,12 @@ public class LoggingAspect {
         String methodName = joinPoint.getSignature().getName();
         System.out.println(" executed \n" + methodName + ": " + Arrays.toString(joinPoint.getArgs()));
         System.out.println("returning: " + results.size() + " entities");
+        
+        // modifying, post-process the return results
+        if (!results.isEmpty() && results.get(0).getClass() == LabGlassware.class){
+            LabGlassware  labGlassware = (LabGlassware) results.get(0);
+            labGlassware.setMaterial("concrete");
+        }
     }
     
     
