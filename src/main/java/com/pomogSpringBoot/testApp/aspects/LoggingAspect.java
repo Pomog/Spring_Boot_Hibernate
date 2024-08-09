@@ -81,8 +81,17 @@ public class LoggingAspect {
     )
     public void errorInFindMethod(JoinPoint joinPoint, Throwable exc) {
         String methodName = joinPoint.getSignature().getName();
+        String signature = String.valueOf(joinPoint.getSignature());
         System.out.println("method -> " + methodName + " returns exception");
+        System.out.println(signature);
         System.out.println(exc.getMessage());
+    }
+    
+    @After("AopExpressions.forAnyMethodInTheProject()")
+    public void afterAdvice (JoinPoint joinPoint){
+        String signature = String.valueOf(joinPoint.getSignature());
+        System.out.println("Method was executed");
+        System.out.println(signature);
     }
     
     
