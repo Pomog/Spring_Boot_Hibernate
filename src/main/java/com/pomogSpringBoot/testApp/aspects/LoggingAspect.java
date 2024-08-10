@@ -2,6 +2,7 @@ package com.pomogSpringBoot.testApp.aspects;
 
 import com.pomogSpringBoot.testApp.entity.glassware.LabGlassware;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -88,10 +89,25 @@ public class LoggingAspect {
     }
     
     @After("AopExpressions.forAnyMethodInTheProject()")
-    public void afterAdvice (JoinPoint joinPoint){
+    public void afterAdvice(JoinPoint joinPoint) {
         String signature = String.valueOf(joinPoint.getSignature());
         System.out.println("Method was executed");
         System.out.println(signature);
+    }
+    
+    @Around("AopExpressions.forFind()")
+    public Object showExecutionTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        long start = System.currentTimeMillis();
+        
+        Object results = proceedingJoinPoint.proceed();
+        
+        long end = System.currentTimeMillis();
+        
+        long duration = (end - start);
+        
+        System.out.println("\n Duration is: " + duration + " ms\n");
+        
+        return results;
     }
     
     
