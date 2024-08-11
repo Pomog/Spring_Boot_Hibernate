@@ -115,7 +115,7 @@ public class LabGlasswareModelController {
     @GetMapping("/lab-glassware-form")
     public String showForm(
             Model theModel,
-            @RequestParam(value = "id", required = false) Long id) {
+            @RequestParam(value = "id", required = false) Long id) throws IllegalAccessException {
         if (id != null && id != 0) {
             LabGlassware labGlassware = labGlasswareService.findLabGlasswareByID(id);
             var labGlasswareModel = new LabGlasswareModel(labGlassware);
@@ -137,7 +137,7 @@ public class LabGlasswareModelController {
             @RequestParam(value = "jointTypes", required = false) List<String> jointTypes,
             @RequestParam(value = "sizeDesignations", required = false) List<String> sizeDesignations,
             @RequestParam("action") String action,
-            @RequestParam(value = "imageFile", required = false) MultipartFile imageFile) {
+            @RequestParam(value = "imageFile", required = false) MultipartFile imageFile) throws IllegalAccessException {
         
         if (bindingResult.hasErrors() && !action.equals("delete")) {
             return "lab-glassware-form";

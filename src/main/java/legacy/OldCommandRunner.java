@@ -42,10 +42,10 @@ public class OldCommandRunner {
         list.forEach(System.out::println);
     }
     
-    private void findLabGlasswareByID(LabGlasswareDAO labGlasswareDAO, Long id) {
-        var fondLabGlassware = labGlasswareDAO.findLabGlasswareByID(id);
-        System.out.println(fondLabGlassware);
-    }
+//    private void findLabGlasswareByID(LabGlasswareDAO labGlasswareDAO, Long id) {
+//        var fondLabGlassware = labGlasswareDAO.findLabGlasswareByID(id);
+//        System.out.println(fondLabGlassware);
+//    }
     
 //    private void createMultipleLabGlassware(LabGlasswareDAO labGlasswareDAO) {
 //        var glassJoint1 = new GlassJoint(JointType.SPHERICAL_BALL, "S35");

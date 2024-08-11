@@ -84,7 +84,7 @@ public class LabGlasswareServiceImpl implements LabGlasswareService{
     }
     
     @Override
-    public LabGlassware findLabGlasswareByID(Long id) {
+    public LabGlassware findLabGlasswareByID(Long id) throws IllegalAccessException {
         return this.labGlasswareDAO.findLabGlasswareByID(id);
     }
     

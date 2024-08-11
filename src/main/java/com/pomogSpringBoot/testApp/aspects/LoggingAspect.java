@@ -97,17 +97,24 @@ public class LoggingAspect {
     
     @Around("AopExpressions.forFind()")
     public Object showExecutionTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        String signature = String.valueOf(proceedingJoinPoint.getSignature());
+        System.out.println("\n Executing @Around on: " + signature);
+        
         long start = System.currentTimeMillis();
-        
-        Object results = proceedingJoinPoint.proceed();
-        
-        long end = System.currentTimeMillis();
-        
-        long duration = (end - start);
-        
-        System.out.println("\n Duration is: " + duration + " ms\n");
-        
-        return results;
+
+        try {
+            Object result = proceedingJoinPoint.proceed();
+            
+            long end = System.currentTimeMillis();
+            long duration = end - start;
+            
+            System.out.println("\nDuration is: " + duration + " ms\n");
+            
+            return result;
+        } catch (Exception exc) {
+            System.out.println("Exception caught by @Around advice: " + exc);
+            return null;
+        }
     }
     
     

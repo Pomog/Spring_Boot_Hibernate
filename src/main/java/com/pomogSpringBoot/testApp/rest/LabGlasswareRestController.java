@@ -35,7 +35,7 @@ public class LabGlasswareRestController {
     }
     
     @GetMapping("/labglassware/{id}")
-    public LabGlassware getLabglasswareByID(@PathVariable Long id) {
+    public LabGlassware getLabglasswareByID(@PathVariable Long id) throws IllegalAccessException {
         var labGlassware = labGlasswareService.findLabGlasswareByID(id);
         if (labGlassware == null) {
             throw new LabGlasswareException("Not found item with id: " + id);
@@ -43,7 +43,7 @@ public class LabGlasswareRestController {
         return labGlassware;
     }
     @GetMapping(value = "/{id}/image")
-    public ResponseEntity<byte[]> getImageLabGlasswareByID(@PathVariable Long id) {
+    public ResponseEntity<byte[]> getImageLabGlasswareByID(@PathVariable Long id) throws IllegalAccessException {
         LabGlassware labGlassware = labGlasswareService.findLabGlasswareByID(id);
         if (labGlassware != null) {
             byte[] imageBytes = java.util.Base64.getDecoder().decode(labGlassware.getImage());
@@ -76,7 +76,7 @@ public class LabGlasswareRestController {
 
     
     @PutMapping("/labglassware")
-    public LabGlasswareDTO updateLabGlassware(@RequestBody @NonNull LabGlassware labGlassware) {
+    public LabGlasswareDTO updateLabGlassware(@RequestBody @NonNull LabGlassware labGlassware) throws IllegalAccessException {
         LabGlassware existingLabGlassware = labGlasswareService.findLabGlasswareByID(labGlassware.getId());
         if (existingLabGlassware == null) {
             throw new LabGlasswareException("LabGlassware not found");
@@ -85,7 +85,7 @@ public class LabGlasswareRestController {
     }
     
     @DeleteMapping("/labglassware/{id}")
-    public String deleteLabGlasswareByID(@PathVariable long id) {
+    public String deleteLabGlasswareByID(@PathVariable long id) throws IllegalAccessException {
         var foundLabGlassware = labGlasswareService.findLabGlasswareByID(id);
         if (foundLabGlassware == null) {
             throw new LabGlasswareException("LabGlassware not found");

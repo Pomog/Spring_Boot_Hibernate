@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface LabGlasswareDAO {
     LabGlassware save (LabGlassware labGlassware);
-    LabGlassware findLabGlasswareByID (Long id);
+    LabGlassware findLabGlasswareByID (Long id) throws IllegalAccessException;
     List<LabGlassware> findAllLabGlassware();
     List<LabGlassware> findLabGlasswareByName(String name);
     List<LabGlassware> brokenAndRepaired(Boolean broken, Boolean repaired);
