@@ -35,7 +35,7 @@ public class LabGlasswareRestController {
     }
     
     @GetMapping("/labglassware/{id}")
-    public LabGlassware getLabglasswareByID(@PathVariable Long id) throws IllegalAccessException {
+    public LabGlassware getLabglasswareByID(@PathVariable Long id) throws IllegalArgumentException {
         var labGlassware = labGlasswareService.findLabGlasswareByID(id);
         if (labGlassware == null) {
             throw new LabGlasswareException("Not found item with id: " + id);
@@ -85,7 +85,7 @@ public class LabGlasswareRestController {
     }
     
     @DeleteMapping("/labglassware/{id}")
-    public String deleteLabGlasswareByID(@PathVariable long id) throws IllegalAccessException {
+    public String deleteLabGlasswareByID(@PathVariable long id) {
         var foundLabGlassware = labGlasswareService.findLabGlasswareByID(id);
         if (foundLabGlassware == null) {
             throw new LabGlasswareException("LabGlassware not found");

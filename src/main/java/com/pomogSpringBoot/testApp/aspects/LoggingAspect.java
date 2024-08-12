@@ -109,10 +109,10 @@ public class LoggingAspect {
             long duration = end - start;
             
             System.out.println("\nDuration is: " + duration + " ms\n");
-            
+            System.out.println("RETURNED: " + result);
             return result;
         } catch (Exception exc) {
-            System.out.println("Exception caught by @Around advice: " + exc);
+            System.out.println("Exception caught by @Around advice: " + exc + "\n" + exc.getMessage());
             return null;
         }
     }

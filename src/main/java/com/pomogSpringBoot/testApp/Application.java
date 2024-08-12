@@ -1,7 +1,6 @@
 package com.pomogSpringBoot.testApp;
 
 import com.pomogSpringBoot.testApp.dao.LabGlasswareDAO;
-import com.pomogSpringBoot.testApp.entity.glassware.LabGlassware;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -14,7 +14,7 @@ public interface LabGlasswareService {
     LabGlasswareDTO save (LabGlassware labGlassware);
     LabGlasswareDTO saveWithImage(LabGlassware labGlasswareReq, MultipartFile file);
     LabGlassware update (LabGlassware labGlassware);
-    LabGlassware findLabGlasswareByID (Long id) throws IllegalAccessException;
+    LabGlassware findLabGlasswareByID (Long id) throws IllegalArgumentException;
     List<LabGlasswareDTO> findAllLabGlassware();
     List<LabGlasswareDTO> findLabGlasswareByName(String name);
     void deleteByID (Long id);

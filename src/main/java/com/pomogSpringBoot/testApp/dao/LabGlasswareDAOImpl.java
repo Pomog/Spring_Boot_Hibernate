@@ -25,9 +25,10 @@ public class LabGlasswareDAOImpl implements LabGlasswareDAO{
     }
     
     @Override
-    public LabGlassware findLabGlasswareByID(Long id) throws IllegalAccessException {
+    public LabGlassware findLabGlasswareByID(Long id) throws IllegalArgumentException{
         if (id == 0){
-            throw new IllegalAccessException();
+            System.out.println("ID IS 0");
+            throw new IllegalArgumentException();
         }
         return                 entityManager.find(LabGlassware.class, id);
     }
