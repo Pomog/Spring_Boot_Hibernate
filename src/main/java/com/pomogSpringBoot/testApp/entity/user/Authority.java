@@ -3,6 +3,7 @@ package com.pomogSpringBoot.testApp.entity.user;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "authorities")
@@ -15,6 +16,7 @@ public class Authority {
     
     @ManyToOne
     @JoinColumn(name = "username", referencedColumnName = "username")
+    @ToString.Exclude
     private User user;
     
     @Column(length = 50, nullable = false)

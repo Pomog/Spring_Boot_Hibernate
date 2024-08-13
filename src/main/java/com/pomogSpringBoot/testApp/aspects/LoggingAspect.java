@@ -7,7 +7,6 @@ import org.aspectj.lang.annotation.*;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
@@ -113,7 +112,7 @@ public class LoggingAspect {
             return result;
         } catch (Exception exc) {
             System.out.println("Exception caught by @Around advice: " + exc + "\n" + exc.getMessage());
-            return null;
+            throw exc;
         }
     }
     

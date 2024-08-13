@@ -43,7 +43,7 @@ public class LabGlasswareRestController {
         return labGlassware;
     }
     @GetMapping(value = "/{id}/image")
-    public ResponseEntity<byte[]> getImageLabGlasswareByID(@PathVariable Long id) throws IllegalAccessException {
+    public ResponseEntity<byte[]> getImageLabGlasswareByID(@PathVariable Long id) {
         LabGlassware labGlassware = labGlasswareService.findLabGlasswareByID(id);
         if (labGlassware != null) {
             byte[] imageBytes = java.util.Base64.getDecoder().decode(labGlassware.getImage());
@@ -76,7 +76,7 @@ public class LabGlasswareRestController {
 
     
     @PutMapping("/labglassware")
-    public LabGlasswareDTO updateLabGlassware(@RequestBody @NonNull LabGlassware labGlassware) throws IllegalAccessException {
+    public LabGlasswareDTO updateLabGlassware(@RequestBody @NonNull LabGlassware labGlassware) {
         LabGlassware existingLabGlassware = labGlasswareService.findLabGlasswareByID(labGlassware.getId());
         if (existingLabGlassware == null) {
             throw new LabGlasswareException("LabGlassware not found");
