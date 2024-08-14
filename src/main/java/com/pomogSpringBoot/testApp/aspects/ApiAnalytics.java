@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 
 @Aspect
-@Order(0)
+@Order(1)
 @Component
 public class ApiAnalytics {
     

@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Aspect
-@Order(1)
+@Order(2)
 @Component
 public class LoggingAspect {
     
@@ -112,7 +112,7 @@ public class LoggingAspect {
             return result;
         } catch (Exception exc) {
             System.out.println("Exception caught by @Around advice: " + exc + "\n" + exc.getMessage());
-            throw exc;
+            return null;
         }
     }
     
